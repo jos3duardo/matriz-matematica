@@ -21,8 +21,8 @@
                                     @endfor
                                     <hr>
                                 @endfor
-                            <a href="#" class="btn btn-warning" id="addLinha">Add linha</a>
-                            <a href="#" class="btn btn-danger" id="removeLinha">Remove linha</a>
+                            <a href="#" class="btn btn-warning" id="addLinha">+ linha</a>
+                            <a href="#" class="btn btn-danger" id="removeLinha">- linha</a>
                             <button type="submit" class="btn btn-success">Gravar</button>
                         </form>
                     </div>
