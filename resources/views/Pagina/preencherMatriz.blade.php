@@ -2,7 +2,7 @@
 @section('content')
     <div class="content">
         <div class="row">
-            <div class="col-md-3">
+            <div class="col-md-2">
                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
                     Itens Avaliados
                 </button>
@@ -13,17 +13,20 @@
                         <h3>Preencher a Matriz <small>( {{$linha}} linhas X {{$coluna}} colunas)</small></h3>
                     </div>
                     <div class="card-body">
-                        <form action="{{route('gravarMatriz')}}" method="post">
+                        <form action="{{route('gravarMatriz',['linha'=>$linha, 'colunas' =>$coluna])}}" method="post">
                             @csrf
+                            <div>
                                 @for($i = 1; $i <= $linha;$i++)
                                     @for($j = 1; $j <= $coluna;$j++)
-                                        <input type="text" name="valores[]"  required autofocus>
+                                        <input type="text" name="valores[]" id="col{{$j}}lin{{$i}}" required autofocus>
                                     @endfor
                                     <hr>
                                 @endfor
+                            </div>
+
+                            <button type="submit" class="btn btn-success"  id="listaValores">Gravar</button>
                             <a href="#" class="btn btn-warning" id="addLinha">+ linha</a>
                             <a href="#" class="btn btn-danger" id="removeLinha">- linha</a>
-                            <button type="submit" class="btn btn-success">Gravar</button>
                         </form>
                     </div>
                 </div>

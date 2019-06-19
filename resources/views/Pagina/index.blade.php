@@ -3,8 +3,8 @@
 
 <div class="content">
     <div class="row">
-        <div class="col-md-2"></div>
-        <div class="col-md-8">
+        <div class="col-md-3"></div>
+        <div class="col-md-6">
             <div class="card border">
                 <div class="card-header">
                     <h4>Gerar matriz</h4>
@@ -14,57 +14,65 @@
                         @csrf
                         <div class="form-row">
                             <div class="col">
-                                <label for="">Linhas</label>
-                                <input type="number" class="form-control" name="linhas" placeholder="Número de Linhas" required>
-                            </div>
-                            <div class="col">
-                                <label for="">Colunas</label>
                                 <input type="number" class="form-control" name="colunas" placeholder="Número de Colunas" required>
                             </div>
-
+                            <div class="col">
+                                <input type="number" class="form-control" name="linhas" placeholder="Número de Linhas" required>
+                            </div>
                         </div>
                         <hr>
                         <button type="submit" class="btn btn-warning">Gerar Matriz</button>
                     </form>
                 </div>
+
             </div>
-            @if(count($matrizes) > 0)
-                <div class="card border">
-                    <div class="card-header">
-                        <h4>Matrizes Geradas</h4>
-                    </div>
-                    <div class="card-body">
+        </div>
+    </div>
+    <hr>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <h4 class="card-title">Matrizes Geradas</h4>
+                </div>
+                <div class="card-body">
+                    @if(count($matrizes) > 0 )
+
                         <table class="table table-hover table-sm">
                             <thead>
                             <tr>
-                                <td>ID</td>
-                                <td>Coluna</td>
-                                <td>Linha</td>
+                                <td>Id</td>
+                                <td>Num Linha</td>
+                                <td>Quant Coluna</td>
                                 <td>Tipo</td>
-                                <td>Opção</td>
+                                <td>Data</td>
+                                <td>Ações</td>
                             </tr>
                             </thead>
                             <tbody>
-                            @foreach($matrizes as $linha)
+                            @foreach($matrizes as $matriz)
                                 <tr>
-                                    <th>{{$linha->id}}</th>
-                                    <th>{{$linha->colunas}}</th>
-                                    <th>{{$linha->linhas}}</th>
-                                    <th>{{$linha->tipo}}</th>
-                                    <th>
-                                        <a href="{{route('ver', ['id' =>$linha->id])}}" class="btn btn-primary btn-sm">Ver</a>
-                                        <a href="#" class="btn btn-success btn-sm">Edit</a>
-                                        <a href="{{route('destroy', ['id' =>$linha->id])}}" class="btn btn-danger btn-sm">Apagar</a>
-                                    </th>
+                                    <td>{{$matriz->id}}</td>
+                                    <td>{{$matriz->linhas}}</td>
+                                    <td>{{$matriz->colunas}}</td>
+                                    <td>{{($matriz->tipo ? $matriz->tipo : "Sem tipo") }}</td>
+                                    <td>{{$matriz->created_at->format('d/m/Y h:i:s')}}</td>
+                                    <td>
+                                        <a href="{{route('ver', ['id' => $matriz->id])}}" class="btn btn-success btn-sm">Ver</a>
+                                        <a href="{{route('destroy',['id' => $matriz->id])}}" class="btn btn-danger btn-sm">Deletar</a>
+                                    </td>
                                 </tr>
                             @endforeach
                             </tbody>
                         </table>
-                    </div>
+
+                    @else
+                        <h3>ainda não existe nenhuma matriz no sistema</h3>
+                    @endif
                 </div>
-            @endif
+            </div>
         </div>
     </div>
-</div>
 
+</div>
 @endsection

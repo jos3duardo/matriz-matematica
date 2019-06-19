@@ -27,53 +27,67 @@ class MatrizController extends Controller
 
     }
 
-    /**
-     * direciona para uma view com a matriz
-     */
-    public function ver($id){
-        $matriz = Matriz::find($id);
-        $linha = $matriz->linhas;
-        $coluna = $matriz->colunas;
 
+    public function gravarMatriz(Request $request, $linha, $coluna){
+
+        $dados = json_encode($request->input('valores'));
+        $matriz = new Matriz();
+        $matriz->linhas = $linha;
+        $matriz->colunas = $coluna;
+        if ($matriz->save()){
+            $dadosMatriz = new dadosMatriz();
+            $dadosMatriz->matrizs_id = $matriz->id;
+            $dadosMatriz->dados = $dados;
+            $dadosMatriz->save();
+        }
+        return redirect(route('index'))->with('success','A matriz foi apagada com sucesso!');
+    }
+
+
+    public function verMatriz($id){
+        $matriz = Matriz::find($id);
+        $dados = dadosMatriz::where([
+            'matrizs_id' => $matriz->id
+        ])->get();
+//        dd($dados);
+        $dadosMatriz = $dados[0]->dados;
+        $dadosJson = json_decode($dadosMatriz);
+
+        return view('Pagina.verMatriz',compact('dadosJson','dados','matriz'));
+    }
+
+    public function matrizInversa($id){
+
+        $matriz = Matriz::find($id);
         $dados = dadosMatriz::where([
             'matrizs_id' => $matriz->id
         ])->get();
 
-        dd($dados);
-        if (isset($dados)){
-            return view('Pagina.preencherMatriz', compact('linha','coluna','matriz','dados'));
+        $dadosMatriz = $dados[0]->dados;
+        $dadosJson = json_decode($dadosMatriz);
+        $inversa = array();
+        foreach ($dadosJson as $key => $dados){
+            $inversa[$key] = ($dados * (-1));
         }
-        return view('Pagina.preencherMatriz', compact('linha','coluna','matriz'));
+
+//        dd($inversa);
+        return view('Pagina.verMatrizInversa',compact('dadosJson','dados','matriz','inversa'));
     }
     public function destroy($id){
         $matriz = Matriz::find($id);
 
+        $dados = dadosMatriz::where([
+            'matrizs_id' => $matriz->id
+        ])->first();
+
+        $dados->delete();
+
         if($matriz->delete()){
-            return redirect(route('index'))->with('success','A matriz foi apagada com sucesso!');
+
+            return redirect(route('index'))->with('success','A matriz e todos os seus dados foram apagada com sucesso!');
         }else{
             return redirect(route('index'))->with('success','A matriz não pode ser apagada!');
         }
-
-
-
     }
 
-//    public function gravarMatriz(Request $request, $id){
-    public function gravarMatriz(Request $request){
-
-dd($request);
-        $dado = $request->input('valores');
-        $json = json_encode($dado);
-
-        $matriz = Matriz::find($id);
-
-        foreach ($dado as $key => $dados){
-            $dados = new dadosMatriz();
-            $dados->matrizs_id = $matriz->id;
-            $dados->dados = $dado[$key];
-            $dados->save();
-        }
-
-        return redirect(route('ver',['id' => $matriz->id]))->with('success','A matriz foi apagada com sucesso!');
-    }
 }
