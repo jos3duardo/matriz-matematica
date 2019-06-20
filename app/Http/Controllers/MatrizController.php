@@ -44,19 +44,24 @@ class MatrizController extends Controller
     }
 
 
-    public function verMatriz($id){
+    public function Ver($id){
         $matriz = Matriz::find($id);
         $dados = dadosMatriz::where([
             'matrizs_id' => $matriz->id
         ])->get();
 //        dd($dados);
+
         $dadosMatriz = $dados[0]->dados;
         $dadosJson = json_decode($dadosMatriz);
+        $inversa = array();
+        foreach ($dadosJson as $key => $dados){
+            $inversa[$key] = ($dados * (-1));
+        }
 
-        return view('Pagina.verMatriz',compact('dadosJson','dados','matriz'));
+        return view('Matriz.Ver',compact('dadosJson','dados','matriz','inversa'));
     }
 
-    public function matrizInversa($id){
+    public function Inversa($id){
 
         $matriz = Matriz::find($id);
         $dados = dadosMatriz::where([
@@ -71,8 +76,24 @@ class MatrizController extends Controller
         }
 
 //        dd($inversa);
-        return view('Pagina.verMatrizInversa',compact('dadosJson','dados','matriz','inversa'));
+//        return view('Matriz.Inversa',compact('dadosJson','dados','matriz','inversa'));
+        return view('Matriz.ver',compact('dadosJson','dados','matriz','inversa'));
     }
+
+
+    public function Transposta($id){
+
+        $matriz = Matriz::find($id);
+        $dados = dadosMatriz::where([
+            'matrizs_id' => $matriz->id
+        ])->get();
+
+        $dadosMatriz = $dados[0]->dados;
+        $dadosJson = json_decode($dadosMatriz);
+
+        return view('Matriz.Transposta',compact('dadosJson','dados','matriz'));
+    }
+
     public function destroy($id){
         $matriz = Matriz::find($id);
 

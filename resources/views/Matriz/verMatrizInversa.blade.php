@@ -20,7 +20,8 @@
                         @endforeach
                     </div>
                     <div class="card-footer">
-                        <a href="{{route('ver',['id' => $matriz->id])}}" class="btn btn-primary "><i class="fas fa-retweet"></i> Inversa</a>
+                        <a href="{{route('ver',['id' => $matriz->id])}}" class="btn btn-success "><i class="fas fa-exchange-alt"></i> Inversa</a>
+                        <a href="{{route('ver',['id' => $matriz->id])}}" class="btn btn-warning "><i class="fas fa-retweet"></i> Transposta</a>
                     </div>
                 </div>
             </div>
