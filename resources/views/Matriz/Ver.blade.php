@@ -1,6 +1,5 @@
 @extends('Layout.principal')
 @section('content')
-
     <div class="row">
         <div class="col-md-1">
             @component('Components.sidebar')
@@ -17,7 +16,6 @@
                         $teste=1;
                         $colunas = $matriz->colunas;
                     @endphp
-
                     @foreach($dadosJson as $key => $dado)
                         <?= $key?><input type="text" value="{{$dado}}">
                         @if($colunas == $teste )
@@ -27,18 +25,13 @@
                         <?php
                             $teste++
                         ?>
-
                     @endforeach
-
-
                 </div>
                 <br><br>
                 <hr>
                 <div class="card-footer">
-{{--                        <a href="{{route('inversa',['id' => $matriz->id])}}" class="btn btn-success "><i class="fas fa-exchange-alt"></i> Inversa</a>--}}
                     <button type="button" onclick="Inversa('Inversa')" class="btn btn-success"><i class="fas fa-exchange-alt"></i> Inversa</button>
                     <button type="button" onclick="Transposta('Transposta')" class="btn btn-warning"><i class="fas fa-retweet"></i> Transposta</button>
-{{--                        <a href="{{route('transposta',['id' => $matriz->id])}}" class="btn btn-warning "><i class="fas fa-retweet"></i> Transposta</a>--}}
                 </div>
                 {{--inicio matriz inversa--}}
                 <div id="Inversa" style="display: none">

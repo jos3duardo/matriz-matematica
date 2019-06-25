@@ -45,7 +45,7 @@
                                 <td>Id</td>
                                 <td>Linha</td>
                                 <td>Coluna</td>
-                                <td>Tipo</td>
+{{--                                <td>Tipo</td>--}}
                                 <td>Data</td>
                                 <td>Ações</td>
                             </tr>
@@ -56,7 +56,7 @@
                                     <td>{{$matriz->id}}</td>
                                     <td>{{$matriz->linhas}}</td>
                                     <td>{{$matriz->colunas}}</td>
-                                    <td>{{($matriz->tipo ? $matriz->tipo : "Sem tipo") }}</td>
+{{--                                    <td>{{($matriz->tipo ? $matriz->tipo : "Sem tipo") }}</td>--}}
                                     <td>{{$matriz->created_at->format('d/m/Y h:i:s')}}</td>
                                     <td>
                                         <a href="{{route('ver', ['id' => $matriz->id])}}" class="btn btn-success btn-sm">Ver</a>
