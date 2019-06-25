@@ -28,9 +28,10 @@
             </div>
         </div>
     </div>
-    <hr>
+    <br>
     <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-1"></div>
+        <div class="col-md-10">
             <div class="card">
                 <div class="card-header">
                     <h4 class="card-title">Matrizes Geradas</h4>
@@ -42,8 +43,8 @@
                             <thead>
                             <tr>
                                 <td>Id</td>
-                                <td>Num Linha</td>
-                                <td>Quant Coluna</td>
+                                <td>Linha</td>
+                                <td>Coluna</td>
                                 <td>Tipo</td>
                                 <td>Data</td>
                                 <td>Ações</td>

@@ -19,16 +19,21 @@
                     @endphp
 
                     @foreach($dadosJson as $key => $dado)
-                        <input type="text" value="{{$dado}}">
-                        <?php
-                        ?>
+                        <?= $key?><input type="text" value="{{$dado}}">
                         @if($colunas == $teste )
                             <br/>
-                            <?php $colunas+=$matriz->colunas;?>
+                            <?php $colunas+=$matriz->colunas; ?>
                         @endif
-                        <?php $teste++?>
+                        <?php
+                            $teste++
+                        ?>
+
                     @endforeach
+
+
                 </div>
+                <br><br>
+                <hr>
                 <div class="card-footer">
 {{--                        <a href="{{route('inversa',['id' => $matriz->id])}}" class="btn btn-success "><i class="fas fa-exchange-alt"></i> Inversa</a>--}}
                     <button type="button" onclick="Inversa('Inversa')" class="btn btn-success"><i class="fas fa-exchange-alt"></i> Inversa</button>
