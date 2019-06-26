@@ -20,7 +20,6 @@
                        $colunas = $matriz->colunas;
                     @endphp
                     @foreach($dadosJson as $key => $dado)
-                        <?= $key?>
                         <?php
 
                         ?>
