@@ -25,8 +25,8 @@
                             </div>
 
                             <button type="submit" class="btn btn-success"  id="listaValores">Gravar</button>
-                            <a href="#" class="btn btn-warning" id="addLinha">+ linha</a>
-                            <a href="#" class="btn btn-danger" id="removeLinha">- linha</a>
+                            <a href="#" onclick="alert('Em desenvolvimento')" class="btn btn-warning" id="addLinha">+ linha</a>
+                            <a href="#" onclick="alert('Em desenvolvimento')" class="btn btn-danger" id="removeLinha">- linha</a>
                         </form>
                     </div>
                 </div>

@@ -60,7 +60,7 @@
                                     <td>{{$matriz->created_at->format('d/m/Y h:i:s')}}</td>
                                     <td>
                                         <a href="{{route('ver', ['id' => $matriz->id])}}" class="btn btn-success btn-sm">Ver</a>
-                                        <a href="{{route('destroy',['id' => $matriz->id])}}" class="btn btn-danger btn-sm">Deletar</a>
+                                        <a href="{{route('destroy',['id' => $matriz->id])}}" onclick="return confirm('Deseja excluir esta matriz')" class="btn btn-danger btn-sm">Deletar</a>
                                     </td>
                                 </tr>
                             @endforeach

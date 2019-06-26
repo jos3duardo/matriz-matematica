@@ -49,8 +49,6 @@ class MatrizController extends Controller
         $dados = dadosMatriz::where([
             'matrizs_id' => $matriz->id
         ])->get();
-//        dd($dados);
-
         $dadosMatriz = $dados[0]->dados;
         $dadosJson = json_decode($dadosMatriz);
         $inversa = array();

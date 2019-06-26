@@ -7,3 +7,4 @@ $().on('click','#listaValores button', function (e) {
     console.log($(this))
 
 })
+console.log(colunas)
