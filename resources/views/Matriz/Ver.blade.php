@@ -106,32 +106,7 @@
                 </div>
             </div>
             {{--fim matriz transposta--}}
-            {{--inicio matriz transposta--}}
-{{--            <div id="Transposta2" style="display: none">--}}
-{{--                <br>--}}
-{{--                <div class="card"  style="text-align: center">--}}
-{{--                    <div class="card-header">--}}
-{{--                        <h4 class="card-title">Matriz Transposta</h4>--}}
-{{--                        <h5 class="card-title">{{$matriz->colunas}} linhas  x {{$matriz->linhas}} Colunas </h5>--}}
-{{--                    </div>--}}
-{{--                    <div class="card-body">--}}
-{{--                        col<?= json_encode($colunaMatriz);?>--}}
-{{--                        <br>--}}
-{{--                        lin<?= json_encode($linhaMatriz);?>--}}
-{{--                        <br>--}}
-{{--                        <br>--}}
-{{--                       <?php--}}
-{{--                        for ($col = 1; $col <= $matriz->colunas; $col++ ){--}}
-{{--                            for ($line = 1; $line <= $matriz->linhas; $line++ ){--}}
-{{--                                    echo 'linha '.$line.' e coluna '.$col.' -';--}}
-{{--                                }--}}
-{{--                                echo '<br>';--}}
-{{--                            }--}}
-{{--                        ?>--}}
-{{--                    </div>--}}
-{{--                </div>--}}
-{{--            </div>--}}
-            {{--fim matriz transposta--}}
+
         </div>
     </div>
     <script>
@@ -143,13 +118,6 @@
                 document.getElementById(el).style.display = 'block';
         }
         function Transposta(el) {
-            var display = document.getElementById(el).style.display;
-            if(display == "block")
-                document.getElementById(el).style.display = 'none';
-            else
-                document.getElementById(el).style.display = 'block';
-        }
-        function Transposta2(el) {
             var display = document.getElementById(el).style.display;
             if(display == "block")
                 document.getElementById(el).style.display = 'none';
