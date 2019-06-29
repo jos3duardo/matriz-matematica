@@ -1,10 +1,9 @@
-<div class="col-md-2">
+<nav class="col-md-2 d-none d-md-block bg-light sidebar">
     <a href="{{route('index')}}" class="btn btn-danger"><span class="fas fa-home"></span> Inicio</a><br>
     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
         Itens Avaliados
     </button>
-</div>
-
+</nav>
 
 <!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">

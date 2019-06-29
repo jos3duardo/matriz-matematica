@@ -1,11 +1,7 @@
 @extends('Layout.principal')
 @section('content')
-<<<<<<< Updated upstream
-
 <div class="content">
     <div class="row">
-        <div class="col-md-3"></div>
-        <div class="col-md-6">
             <div class="card border">
                 <div class="card-header">
                     <h4>Gerar matriz</h4>
@@ -133,8 +129,6 @@
                     @endforeach
                     </tbody>
                 </table>
->>>>>>> Stashed changes
-
             @else
                 <h3>ainda não existe nenhuma matriz no sistema</h3>
             @endif

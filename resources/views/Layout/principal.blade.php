@@ -8,6 +8,8 @@
 
     {{-- style   --}}
     <link rel="stylesheet" href="{{asset('css/bootstrap.min.css')}}">
+    <link rel="stylesheet" href="{{asset('css/dashboard.css')}}">
+    <link rel="stylesheet" href="{{asset('css/style.css')}}">
 
     {{-- javascript   --}}
     <script src="{{asset('js/jquery-3.3.1.slim.min.js')}}"></script>
@@ -19,6 +21,8 @@
     <title>Matriz</title>
 </head>
 <body>
+    @component('Components.nav')
+    @endcomponent
         {{-- mensagem para tratamento do retorno--}}
         @if ($errors->any())
             <div>
@@ -44,14 +48,6 @@
                 <h4>{{ session('error') }}</h4>
             </div>
         @endif
-
-<<<<<<< Updated upstream
-
-    @yield('content')
-
-=======
-        @component('Components.nav')
-        @endcomponent
         <div class="container-fluid">
             <div class="row">
                 @component('Components.sidebar')
@@ -61,6 +57,5 @@
                 </main>
             </div>
         </div>
->>>>>>> Stashed changes
 </body>
 </html>

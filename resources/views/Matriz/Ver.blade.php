@@ -1,61 +1,53 @@
 @extends('Layout.principal')
 @section('content')
     <div class="row">
-        @component('Components.sidebar')
-        @endcomponent
-        <div class="col-md-10">
-            <div class="card" style="text-align: center" >
-                <div class="card-header">
-                    <h3>Matriz</h3>
-                    <h4 class="card-title">{{$matriz->linhas}} linhas  x {{$matriz->colunas}} Colunas </h4><br>
-                </div>
-                <div id="tabela" class="card-body">
-                    @php
-                       $auxiliar=1;
-                       $testeLinha = array();
-                       $testeColuna = array();
-                       $colunaMatriz = array();
-                       $linhaMatriz = array();
-                       $linhaMatriz1 = array();
-                       $colunas = $matriz->colunas;
-                    @endphp
-                    @foreach($dadosJson as $key => $dado)
+        <div class="card" style="text-align: center" >
+            <div class="card-header">
+                <h3>Matriz</h3>
+                <h4 class="card-title">{{$matriz->linhas}} linhas  x {{$matriz->colunas}} Colunas </h4><br>
+            </div>
+            <div id="tabela" class="card-body">
+                @php
+                   $auxiliar=1;
+                   $testeLinha = array();
+                   $testeColuna = array();
+                   $colunaMatriz = array();
+                   $linhaMatriz = array();
+                   $linhaMatriz1 = array();
+                   $colunas = $matriz->colunas;
+                @endphp
+                @foreach($dadosJson as $key => $dado)
+                    <?php
+
+                    ?>
+                    <input  type="text" class="inputMatriz" value="{{$dado}}">
+
+                    @if($colunas == $auxiliar )
                         <?php
 
+                            $colunaMatriz[$auxiliar] = $dado;
                         ?>
-                        <input  type="text" value="{{$dado}}">
-
-                        @if($colunas == $auxiliar )
-                            <?php
-
-                                $colunaMatriz[$auxiliar] = $dado;
-                            ?>
-                            <br/>
-                            <?php $colunas+=$matriz->colunas; ?>
-                        @endif
-                        <?php $auxiliar++?>
-                    @endforeach
-                </div>
-                <div class="card-footer">
-                    <button type="button" onclick="Inversa('Inversa')" class="btn btn-success"><i class="fas fa-exchange-alt"></i> Inversa</button>
-                    <button type="button" onclick="Transposta('Transposta')" class="btn btn-warning"><i class="fas fa-retweet"></i> Transposta</button>
-                    <button id="teste" type="button" onclick="Transposta2('Transposta2')" class="btn btn-dark"><i class="far fa-hourglass"></i> é simétrica</button>
-                    <button type="button" onclick="alert('Soma de matriz em desenvolvimento')" class="btn btn-info"><i class="fas fa-plus"></i> Somar</button>
-                </div>
+                        <br/>
+                        <?php $colunas+=$matriz->colunas; ?>
+                    @endif
+                    <?php $auxiliar++?>
+                @endforeach
+            </div>
+            <div class="card-footer">
+                <button type="button" onclick="Inversa('Inversa')" class="btn btn-success"><i class="fas fa-exchange-alt"></i> Inversa</button>
+                <button type="button" onclick="Transposta('Transposta')" class="btn btn-warning"><i class="fas fa-retweet"></i> Transposta</button>
+                <button id="teste" type="button" onclick="Transposta2('Transposta2')" class="btn btn-dark"><i class="far fa-hourglass"></i> é simétrica</button>
+                <button type="button" onclick="alert('Soma de matriz em desenvolvimento')" class="btn btn-info"><i class="fas fa-plus"></i> Somar</button>
             </div>
         </div>
     </div>
     <div class="row">
-        <div class="col-md-2"></div>
-        <div class="col-md-10">
             {{--inicio matriz inversa--}}
             <div id="Inversa" style="display: none">
-                <br>
                 <div class="card"  style="text-align: center">
                     <div class="card-header">
                         <h4 class="card-title">Matriz Inversa</h4>
                     </div>
-
                     <div class="card-body">
                         @php
                             $auxiliar=1;
@@ -63,7 +55,7 @@
                         @endphp
 
                         @foreach($inversa as $key => $dado)
-                            <input type="text" value="{{$dado}}">
+                            <input type="text" class="inputMatriz" value="{{$dado}}">
                             @if($colunas == $auxiliar )
                                 <br/>
                                 <?php
@@ -78,11 +70,9 @@
             {{--fim matriz inversa--}}
             {{--inicio matriz transposta--}}
             <div id="Transposta" style="display: none">
-                <br>
                 <div class="card"  style="text-align: center">
                     <div class="card-header">
                         <h4 class="card-title">Matriz Transposta</h4>
-                        <h5 class="card-title">{{$matriz->colunas}} linhas  x {{$matriz->linhas}} Colunas </h5>
                     </div>
 
 
@@ -92,7 +82,7 @@
                             $colunas = $matriz->linhas;
                         @endphp
                         @foreach($dadosJson as $key => $dado)
-                            <input type="text" value="{{$dado}}">
+                            <input type="text"  class="inputMatriz" value="{{$dado}}">
                             @if($colunas == $auxiliar )
                                 <br/>
                                 <?php
