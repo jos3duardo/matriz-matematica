@@ -34,10 +34,13 @@
                 @endforeach
             </div>
             <div class="card-footer">
-                <button type="button" onclick="Inversa('Inversa')" class="btn btn-success"><i class="fas fa-exchange-alt"></i> Inversa</button>
-                <button type="button" onclick="Transposta('Transposta')" class="btn btn-warning"><i class="fas fa-retweet"></i> Transposta</button>
-                <button id="teste" type="button" onclick="Transposta2('Transposta2')" class="btn btn-dark"><i class="far fa-hourglass"></i> é simétrica</button>
-                <button type="button" onclick="alert('Soma de matriz em desenvolvimento')" class="btn btn-info"><i class="fas fa-plus"></i> Somar</button>
+                <button type="button" onclick="Inversa('Inversa')" class="btn btn-sm btn-success"><i class="fas fa-exchange-alt"></i> Inversa</button>
+                <button type="button" onclick="Transposta('Transposta')" class="btn btn-sm btn-warning"><i class="fas fa-retweet"></i> Transposta</button>
+                <button id="teste" type="button" onclick="Transposta2('Transposta2')" class="btn btn-sm btn-dark"><i class="far fa-hourglass"></i> é simétrica</button>
+                <button type="button" onclick="alert('Soma de matriz em desenvolvimento')" class="btn btn-sm btn-info"><i class="fas fa-plus"></i> Somar</button>
+                <button onclick="alert('Subtracao de matriz em desenvolvimento')" class="btn btn-sm btn-danger"><i class="fas fa-minus"></i> Subtrair</button>
+                <button onclick="alert('Subtracao de matriz em desenvolvimento')" class="btn btn-sm btn-default" style="border-color: black"><i class="fas fa-times"></i> Multiplicar</button>
+                <button onclick="alert('Subtracao de matriz em desenvolvimento')" class="btn btn-sm btn-primary"><i class="fas fa-times"></i> Multiplicar Matriz</button>
             </div>
         </div>
     </div>
