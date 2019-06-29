@@ -22,7 +22,7 @@ class MatrizController extends Controller
     public function gerarMatriz(Request $request){
         $linha = $request->input('linhas');
         $coluna = $request->input('colunas');
-        return view('Pagina.preencherMatriz', compact('linha','coluna'));
+        return view('Matriz.preencher', compact('linha','coluna'));
     }
     public function gravarMatriz(Request $request, $linha, $coluna){
         $dados = json_encode($request->input('valores'));
