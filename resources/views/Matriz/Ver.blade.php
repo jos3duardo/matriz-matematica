@@ -121,10 +121,10 @@
                 </div>
                 <div class="modal-body">
                     <div class="list-group-vertical-sm">
-                        <h4>Número de Linas - {{$matriz->linhas}}</h4>
-                        <h4>Número de Colunas - {{$matriz->colunas}}</h4>
-                        <h4>Tipo - {{$matriz->tipo}}</h4>
-                        <h4>Criada em - {{$matriz->created_at->format('d/m/Y H:i:s')}}</h4>
+                        <h5>Número de Linas - {{$matriz->linhas}}</h5>
+                        <h5>Número de Colunas - {{$matriz->colunas}}</h5>
+                        <h5>Tipo -{{($matriz->tipo ? $matriz->tipo : "Sem tipo definido") }}</h5>
+                        <h5>Criada em - {{$matriz->created_at->format('d/m/Y H:i:s')}}</h5>
                     </div>
                 </div>
             </div>
