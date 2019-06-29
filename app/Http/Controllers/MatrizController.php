@@ -8,27 +8,43 @@ use Illuminate\Http\Request;
 
 class MatrizController extends Controller
 {
-    public function index(){
+    public function index()
+    {
         $matrizes = Matriz::all();
-    return view('Pagina.index', compact('matrizes'));
+        return view('Pagina.index', compact('matrizes'));
     }
-
 
     /** como o proprio nome sugere ele gera os campos para o usuario preencher a matriz
      * @param Request $request
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function gerarMatriz(Request $request){
-        dd($request);
+    public function gerarMatriz(Request $request)
+    {
         $linha = $request->input('linhas');
         $coluna = $request->input('colunas');
-        return view('Matriz.preencher', compact('linha','coluna'));
+        return view('Matriz.preencher', compact('linha', 'coluna'));
     }
-    public function gravarMatriz(Request $request, $linha, $coluna){
+
+    public function gravarMatriz(Request $request, $linha, $coluna)
+    {
+
+//        dd($request, $linha, $coluna);
         $dados = json_encode($request->input('valores'));
         $matriz = new Matriz();
         $matriz->linhas = $linha;
         $matriz->colunas = $coluna;
+
+
+
+        for ($i = 1; $i <= $linha; $i++){
+            for ($j = 1; $j <= $coluna; $j++){
+                $teste = [
+                    $coluna[$i] => $j
+                ];
+            }
+        }
+dd($teste);
+
         if ($linha == $coluna){
             $matriz->tipo = 'Quadrada';
         }
