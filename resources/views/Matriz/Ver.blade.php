@@ -45,7 +45,7 @@
             {{--inicio matriz inversa--}}
             <div id="Inversa" style="display: none">
                 <div class="card"  style="text-align: center">
-                    <div class="card-header">
+                    <div class="card-header alert-success" >
                         <h4 class="card-title">Matriz Inversa</h4>
                     </div>
                     <div class="card-body">
@@ -71,10 +71,10 @@
         {{--inicio matriz transposta--}}
         <div id="Transposta" style="display: none">
             <div class="card"  style="text-align: center">
-                <div class="card-header">
+                <div class="card-header alert-warning">
                     <h4 class="card-title">Matriz Transposta</h4>
                 </div>
-                <div class="card-body">
+                <div class="card-body" >
                     @php
                         $auxiliar=1;
                         $colunas = $matriz->linhas;
