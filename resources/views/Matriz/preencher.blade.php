@@ -14,7 +14,7 @@
                         @csrf
                             @for($i = 1; $i <= $linha;$i++)
                                 @for($j = 1; $j <= $coluna;$j++)
-                                    <input type="number" name="valores[]" class="inputMatriz" id="col{{$j}}lin{{$i}}" required autofocus>
+                                    <input type="text" name="valores[]" class="inputMatriz" id="col{{$j}}lin{{$i}}" required autofocus>
                                 @endfor
                                 <br>
                             @endfor
