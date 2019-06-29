@@ -8,7 +8,6 @@
 
     {{-- style   --}}
     <link rel="stylesheet" href="{{asset('css/bootstrap.min.css')}}">
-    <link rel="stylesheet" href="{{asset('css/bootstrapAdmin.css')}}">
     <link rel="stylesheet" href="{{asset('css/dashboard.css')}}">
     <link rel="stylesheet" href="{{asset('css/style.css')}}">
 
@@ -22,6 +21,8 @@
     <title>Matriz</title>
 </head>
 <body>
+    @component('Components.nav')
+    @endcomponent
         {{-- mensagem para tratamento do retorno--}}
         @if ($errors->any())
             <div>
@@ -49,8 +50,6 @@
         @endif
         <div class="container-fluid">
             <div class="row">
-                @component('Components.nav')
-                @endcomponent
                 @component('Components.sidebar')
                 @endcomponent
                 <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
