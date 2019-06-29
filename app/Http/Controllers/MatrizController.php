@@ -10,7 +10,6 @@ class MatrizController extends Controller
 {
     public function index(){
         $matrizes = Matriz::all();
-
     return view('Pagina.index', compact('matrizes'));
     }
 
@@ -20,6 +19,7 @@ class MatrizController extends Controller
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function gerarMatriz(Request $request){
+        dd($request);
         $linha = $request->input('linhas');
         $coluna = $request->input('colunas');
         return view('Matriz.preencher', compact('linha','coluna'));

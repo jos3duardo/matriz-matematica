@@ -9,11 +9,12 @@
             <form action="{{route('gerarMatriz')}}" method="post">
                 @csrf
                 <div class="form-row">
+
                     <div class="col">
-                        <input type="number" class="form-control" name="colunas" placeholder="Número de Colunas" required>
+                        <input type="number" class="form-control" name="linhas" placeholder="Número de Linhas" required autofocus>
                     </div>
                     <div class="col">
-                        <input type="number" class="form-control" name="linhas" placeholder="Número de Linhas" required>
+                        <input type="number" class="form-control" name="colunas" placeholder="Número de Colunas" required>
                     </div>
                 </div>
                 <hr>
@@ -31,7 +32,6 @@
         </div>
         <div class="card-body">
             @if(count($matrizes) > 0 )
-
                 <table class="table table-hover table-sm">
                     <thead>
                     <tr>
@@ -65,5 +65,4 @@
         </div>
     </div>
 </div>
-
 @endsection

@@ -1,5 +1,11 @@
 @extends('Layout.principal')
 @section('content')
+    <hr>
+        <a href="{{route('index')}}" class="btn btn-dark"> <i class="fas fa-chevron-left"></i> Voltar</a>
+        <a class=" btn btn-warning" data-toggle="modal" data-target="#dadosMatrizModal">
+            <i class="fas fa-info-circle"></i> Dados da Matriz
+        </a>
+    <hr>
     <div class="content">
         <div class="align-items-center pt-3 pb-2 mb-3 border-bottom">
             <div class="card" style="text-align: center" >
@@ -105,4 +111,24 @@
         </div>
     </div>
     </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="dadosMatrizModal" tabindex="-1" role="dialog" aria-labelledby="dadosMatrizModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2>Dados da Matriz</h2>
+                </div>
+                <div class="modal-body">
+                    <div class="list-group-vertical-sm">
+                        <h4>Número de Linas - {{$matriz->linhas}}</h4>
+                        <h4>Número de Colunas - {{$matriz->colunas}}</h4>
+                        <h4>Tipo - {{$matriz->tipo}}</h4>
+                        <h4>Criada em - {{$matriz->created_at->format('d/m/Y H:i:s')}}</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
 @endsection
