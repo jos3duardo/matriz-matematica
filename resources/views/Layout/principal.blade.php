@@ -45,8 +45,22 @@
             </div>
         @endif
 
+<<<<<<< Updated upstream
 
     @yield('content')
 
+=======
+        @component('Components.nav')
+        @endcomponent
+        <div class="container-fluid">
+            <div class="row">
+                @component('Components.sidebar')
+                @endcomponent
+                <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+                    @yield('content')
+                </main>
+            </div>
+        </div>
+>>>>>>> Stashed changes
 </body>
 </html>

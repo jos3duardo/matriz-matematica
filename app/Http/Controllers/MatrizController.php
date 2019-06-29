@@ -20,16 +20,11 @@ class MatrizController extends Controller
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function gerarMatriz(Request $request){
-
         $linha = $request->input('linhas');
         $coluna = $request->input('colunas');
         return view('Pagina.preencherMatriz', compact('linha','coluna'));
-
     }
-
-
     public function gravarMatriz(Request $request, $linha, $coluna){
-
         $dados = json_encode($request->input('valores'));
         $matriz = new Matriz();
         $matriz->linhas = $linha;
@@ -42,8 +37,6 @@ class MatrizController extends Controller
         }
         return redirect(route('index'))->with('success','A matriz foi apagada com sucesso!');
     }
-
-
     public function Ver($id){
         $matriz = Matriz::find($id);
         $dados = dadosMatriz::where([
@@ -55,12 +48,9 @@ class MatrizController extends Controller
         foreach ($dadosJson as $key => $dados){
             $inversa[$key] = ($dados * (-1));
         }
-
         return view('Matriz.Ver',compact('dadosJson','dados','matriz','inversa'));
     }
-
     public function Inversa($id){
-
         $matriz = Matriz::find($id);
         $dados = dadosMatriz::where([
             'matrizs_id' => $matriz->id
