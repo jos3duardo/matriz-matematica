@@ -1,10 +1,5 @@
 @extends('Layout.principal')
 @section('content')
-
-<div class="content">
-    <div class="row">
-        <div class="col-md-3"></div>
-        <div class="col-md-6">
             <div class="card border">
                 <div class="card-header">
                     <h4>Gerar matriz</h4>
@@ -24,14 +19,8 @@
                         <button type="submit" class="btn btn-warning">Gerar Matriz</button>
                     </form>
                 </div>
-
             </div>
-        </div>
-    </div>
-    <br>
-    <div class="row">
-        <div class="col-md-1"></div>
-        <div class="col-md-10">
+
             <div class="card">
                 <div class="card-header">
                     <h4 class="card-title">Matrizes Geradas</h4>
@@ -45,7 +34,7 @@
                                 <td>Id</td>
                                 <td>Linha</td>
                                 <td>Coluna</td>
-{{--                                <td>Tipo</td>--}}
+                                <td>Tipo</td>
                                 <td>Data</td>
                                 <td>Ações</td>
                             </tr>
@@ -56,11 +45,11 @@
                                     <td>{{$matriz->id}}</td>
                                     <td>{{$matriz->linhas}}</td>
                                     <td>{{$matriz->colunas}}</td>
-{{--                                    <td>{{($matriz->tipo ? $matriz->tipo : "Sem tipo") }}</td>--}}
+                                    <td>{{($matriz->tipo ? $matriz->tipo : "Sem tipo definido") }}</td>
                                     <td>{{$matriz->created_at->format('d/m/Y h:i:s')}}</td>
                                     <td>
-                                        <a href="{{route('ver', ['id' => $matriz->id])}}" class="btn btn-success btn-sm">Ver</a>
-                                        <a href="{{route('destroy',['id' => $matriz->id])}}" onclick="return confirm('Deseja excluir esta matriz')" class="btn btn-danger btn-sm">Deletar</a>
+                                        <a href="{{route('ver', ['id' => $matriz->id])}}" class="btn btn-success btn-sm"><i class="fas fa-eye"></i></a>
+                                        <a href="{{route('destroy',['id' => $matriz->id])}}" onclick="return confirm('Deseja excluir esta matriz')" class="btn btn-danger btn-sm"><i class="fas fa-trash-alt"></i></a>
                                     </td>
                                 </tr>
                             @endforeach
@@ -72,8 +61,7 @@
                     @endif
                 </div>
             </div>
-        </div>
-    </div>
+
 
 </div>
 @endsection

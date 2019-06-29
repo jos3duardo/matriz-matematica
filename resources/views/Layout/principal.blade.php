@@ -8,6 +8,9 @@
 
     {{-- style   --}}
     <link rel="stylesheet" href="{{asset('css/bootstrap.min.css')}}">
+    <link rel="stylesheet" href="{{asset('css/bootstrapAdmin.css')}}">
+    <link rel="stylesheet" href="{{asset('css/dashboard.css')}}">
+    <link rel="stylesheet" href="{{asset('css/style.css')}}">
 
     {{-- javascript   --}}
     <script src="{{asset('js/jquery-3.3.1.slim.min.js')}}"></script>
@@ -44,9 +47,16 @@
                 <h4>{{ session('error') }}</h4>
             </div>
         @endif
-
-
-    @yield('content')
-
+        <div class="container-fluid">
+            <div class="row">
+                @component('Components.nav')
+                @endcomponent
+                @component('Components.sidebar')
+                @endcomponent
+                <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+                    @yield('content')
+                </main>
+            </div>
+        </div>
 </body>
 </html>

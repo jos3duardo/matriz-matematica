@@ -1,10 +1,17 @@
-<div class="col-md-2">
-    <a href="{{route('index')}}" class="btn btn-danger"><span class="fas fa-home"></span> Inicio</a><br>
-    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-        Itens Avaliados
-    </button>
-</div>
-
+<nav class="col-md-2 d-none d-md-block bg-light sidebar">
+    <div class="sidebar-sticky">
+        <ul class="nav flex-column">
+            <li class="nav-item">
+                <a href="{{route('index')}}" class=" nav-link btn btn-danger"><span class="fas fa-home"></span></a><br>
+            </li>
+            <li class="nav-item">
+                <a type="button" class=" nav-link btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                    <i class="fas fa-bars"></i>
+                </a>
+            </li>
+        </ul>
+    </div>
+</nav>
 
 <!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">

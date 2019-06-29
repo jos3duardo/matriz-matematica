@@ -34,6 +34,9 @@ class MatrizController extends Controller
         $matriz = new Matriz();
         $matriz->linhas = $linha;
         $matriz->colunas = $coluna;
+        if ($linha == $coluna){
+            $matriz->tipo = 'Quadrada';
+        }
         if ($matriz->save()){
             $dadosMatriz = new dadosMatriz();
             $dadosMatriz->matrizs_id = $matriz->id;
