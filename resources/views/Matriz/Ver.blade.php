@@ -8,7 +8,7 @@
         </a>
     <hr>
     <div class="content">
-        <div class="align-items-center pt-3 pb-2 mb-3 border-bottom">
+        <div class="align-items-center pt-3 pb-2 mb-3 border-bottom" id="principal" style="display: block">
             <div class="card" style="text-align: center" >
                 <div class="card-header">
                     <h4>Matriz - {{$matriz->linhas}} linhas  x {{$matriz->colunas}} Colunas </h4>
