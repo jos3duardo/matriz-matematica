@@ -64,7 +64,6 @@ class MatrizController extends Controller
 
         $dadosMatriz = $dados[0]->dados;
         $dadosJson = json_decode($dadosMatriz);
-        dd($dadosJson);
         $inversa = array();
         foreach ($dadosJson as $key => $dados){
             $inversa[$key] = ($dados * (-1));
@@ -73,12 +72,34 @@ class MatrizController extends Controller
     }
 
     public function multiplicar(Request $request, $id){
+
         $numero = $request->numero;
 
         $matriz = Matriz::find($id);
         $dados = dadosMatriz::where([
             'matrizs_id' => $matriz->id
         ])->get();
+        $dadosMatriz = $dados[0]->dados;
+        $dadosJson = json_decode($dadosMatriz);
+        $inversa = array();
+        foreach ($dadosJson as $key => $dados){
+            $inversa[$key] = ($dados * (-1));
+        }
+        $multiplicacao = array();
+        foreach ($dadosJson as $key => $dados){
+            $multiplicacao[$key] = ($dados * $numero);
+        }
+        return view('Matriz.Ver',compact('dadosJson','dados','matriz','inversa','multiplicacao','numero'));
+
+    }
+    public function multiplicarForm(Request $request, $id){
+        $numero = $request->numero;
+        $matriz = Matriz::find($id);
+        $dados = dadosMatriz::where([
+            'matrizs_id' => $matriz->id
+        ])->get();
+        //dados da matriz multiplicada
+        $dadosNovos = $request->valor;
         $dadosMatriz = $dados[0]->dados;
         $dadosJson = json_decode($dadosMatriz);
         $inversa = array();

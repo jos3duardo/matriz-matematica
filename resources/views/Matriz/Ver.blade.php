@@ -102,23 +102,31 @@
             <div id="Inversa" style="display: block">
                 <div class="card"  style="text-align: center">
                     <div class="card-header">
-                        <h4 class="card-title">Matriz X {{$numero}}</h4>
+                        <h4 class="card-title">Matriz x {{$numero}} </h4>
+
                     </div>
                     <div class="card-body">
                         @php
                             $auxiliar=1;
                             $colunas = $matriz->colunas;
                         @endphp
-                        @foreach($multiplicacao as $key => $dado)
-                            <input type="text" class="inputMatriz" value="{{$dado}}"">
-                            @if($colunas == $auxiliar )
-                                <br/>
-                                <?php
-                                $colunas+=$matriz->colunas;
-                                ?>
-                            @endif
-                            <?php $auxiliar++?>
-                        @endforeach
+                        <form action="{{route('multiplicar',['id'=> $matriz->id])}}" method="post" id="multplicarMatriz">
+                            @csrf
+                            <label for="numero">Multiplicar por :</label>
+                            <input type="text" value="{{$numero}}" name="numero" class="form-group inputMatriz"><br>
+                            @foreach($multiplicacao as $key => $dado)
+                                <input type="text" class="inputMatriz" name="valor[]" value="{{$dado}}">
+                                @if($colunas == $auxiliar )
+                                    <br/>
+                                    <?php
+                                    $colunas+=$matriz->colunas;
+                                    ?>
+                                @endif
+                                <?php $auxiliar++?>
+                            @endforeach
+{{--                            <input type="text" name="numero">--}}
+                            <button type="submit" hidden></button>
+                        </form>
                     </div>
                 </div>
             </div>

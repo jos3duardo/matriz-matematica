@@ -65,4 +65,21 @@
         </div>
     </div>
 </div>
+
+<script>
+        //validando campo da linha e da coluna na hora de criar uma matriz
+        //para não deixar criar uma matriz nula
+        var formGeraMatriz = document.getElementById('formGeraMatriz');
+        var coluna = document.getElementById('coluna');
+        var linha = document.getElementById('linha');
+        formGeraMatriz.addEventListener('submit', function (e) {
+            // alerta o valor do campo
+            if (coluna >= 0 || linha >= 0) {
+                alert('Os campos coluna e linha tem que ser maior 0')
+            }
+            // impede o envio do form
+            e.preventDefault();
+        });
+    //fim da validação do campo da linha e da coluna
+</script>
 @endsection
