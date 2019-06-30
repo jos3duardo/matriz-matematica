@@ -5,21 +5,23 @@ function Inversa(el) {
     else
         document.getElementById(el).style.display = 'block';
 }
-function transposta(el) {
+//mostra a
+function mostrarDiv(el) {
     var display = document.getElementById(el).style.display;
     if(display == "block")
         document.getElementById(el).style.display = 'none';
     else
         document.getElementById(el).style.display = 'block';
 }
-function addMatriz('#divPrincipal') {
-    alert('divi')
+//add uma matriz na tela
+function divPrincipal(el) {
     var display = document.getElementById(el).style.display;
     if(display == "block")
         document.getElementById(el).style.display = 'none';
     else
         document.getElementById(el).style.display = 'block';
 }
+
 
 
 window.onload=function () {
@@ -27,9 +29,6 @@ window.onload=function () {
     $('#numeroMatrizModal').on('shown.bs.modal', function () {
         $('#numero').focus();
     })
-
-
-
 
 }
 

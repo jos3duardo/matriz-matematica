@@ -3,8 +3,10 @@
     <hr>
         <a href="{{route('index')}}" class="btn btn-dark"> <i class="fas fa-chevron-left"></i> Voltar</a>
         <a class=" btn btn-warning" data-toggle="modal" data-target="#dadosMatrizModal">
-
             <i class="fas fa-info-circle"></i> Dados da Matriz
+        </a>
+        <a onclick="divPrincipal('matriz2')" id="btnAddMatriz" class="btn btn-success" >
+            <i class="fas fa-plus"></i> Add da Matriz
         </a>
     <hr>
 
@@ -18,10 +20,24 @@
                     $auxiliar=1;
                     $colunas = $matriz->colunas;
                 @endphp
-                <div class="row">
-                    <div class="col-md-12" id="divPrincipal" style="display: block">
+                <div class="row justify-content-center">
+                    <div class="col-md-auto" id="divPrincipal" style="display: block">
+                        <h4>Matriz 1</h4>
                         @foreach($dadosJson as $key => $dado)
                             <input  type="text" class="inputMatriz" id="dado" value="{{$dado}}">
+                            @if($colunas == $auxiliar )
+                                <br/>
+                                <?php   $colunas+=$matriz->colunas;?>
+                            @endif
+                            <?php
+                            $auxiliar++;
+                            ?>
+                        @endforeach
+                    </div>
+                    <div class="col-md-auto" id="matriz2" style="display: none">
+                        <h4>Matriz 2</h4>
+                        @foreach($dadosJson as $key => $dado)
+                            <input  type="text" class="inputMatriz" id="dado">
                             @if($colunas == $auxiliar )
                                 <br/>
                                 <?php   $colunas+=$matriz->colunas;?>
@@ -34,10 +50,10 @@
                 </div>
             </div>
             <div class="card-footer">
-                <a onclick="Inversa('Inversa')" class="btn btn-sm btn-success"><i class="fas fa-exchange-alt"></i> Inversa</a>
-                <a onclick="transposta('transposta')" class="btn btn-sm btn-warning"><i class="fas fa-retweet"></i> Transposta</a>
+                <a onclick="mostrarDiv('Inversa')" class="btn btn-sm btn-success"><i class="fas fa-exchange-alt"></i> Inversa</a>
+                <a onclick="mostrarDiv('transposta')" class="btn btn-sm btn-warning"><i class="fas fa-retweet"></i> Transposta</a>
                 <a class="btn btn-sm btn-dark"><i class="far fa-hourglass"></i> é simétrica</a>
-                <a onclick="addMatriz()" class="btn btn-sm btn-info"><i class="fas fa-plus"></i> Somar</a>
+                <a c class="btn btn-sm btn-info"><i class="fas fa-plus"></i> Somar</a>
                 <a onclick="alert('Subtracao de matriz em desenvolvimento')" class="btn btn-sm btn-danger"><i class="fas fa-minus"></i> Subtrair</a>
                 <a style="border-color: black" data-toggle="modal" data-target="#numeroMatrizModal" class="btn btn-sm"><i class="fas fa-times"></i> Multiplicar</a>
                 <a onclick="alert('Subtracao de matriz em desenvolvimento')" class="btn btn-sm btn-primary"><i class="fas fa-times"></i> Multiplicar Matriz</a>
@@ -97,6 +113,26 @@
         </div>
     </div>
         {{--fim matriz transposta--}}
+        {{--inicio matriz transposta--}}
+        <div id="addMatriz" style="display: none">
+                <div class="card-body alert-warning"  >
+                    @php
+                        $auxiliar=1;
+                        $colunas = $matriz->linhas;
+                    @endphp
+                    @foreach($dadosJson as $key => $dado)
+                        <input type="text" class="inputMatriz" name="">
+                        @if($colunas == $auxiliar )
+                            <br/>
+                            <?php
+                            $colunas+=$matriz->linhas;
+                            ?>
+                        @endif
+                        <?php $auxiliar++?>
+                    @endforeach
+                </div>
+            </div>
+        {{--fim matriz transposta--}}
 
         {{--inicio matriz multiplicada por um numero x--}}
         @if(isset($multiplicacao))
@@ -113,8 +149,8 @@
                     @endphp
                     <form action="{{route('multiplicar',['id'=> $matriz->id])}}" method="post" id="multplicarMatriz">
                         @csrf
-                        <label for="numero">Multiplicar por :</label>
-                        <input type="text" value="{{$numero}}" name="numero" class="form-group inputMatriz"><br>
+{{--                        <label for="numero">Multiplicar por :</label>--}}
+{{--                        <input type="text" value="{{$numero}}" name="numero" class="form-group inputMatriz"><br>--}}
                         @foreach($multiplicacao as $key => $dado)
                             <input type="text" class="inputMatriz" name="valor[]" value="{{$dado}}">
                             @if($colunas == $auxiliar )

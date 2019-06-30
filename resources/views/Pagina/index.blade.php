@@ -1,9 +1,9 @@
 @extends('Layout.principal')
 @section('content')
     <hr>
-    <a class=" btn btn-warning" data-toggle="modal" data-target="#gerarMatrizModal">
-        <i class="fas fa-folder-plus"></i> Criar Matriz
-    </a>
+        <a class=" btn btn-warning" data-toggle="modal" data-target="#gerarMatrizModal">
+            <i class="fas fa-folder-plus"></i> Criar Matriz
+        </a>
     <hr>
     {{-- Matrizes geradas--}}
     <div class="align-items-center pt-3 pb-2 mb-3 border-bottom">
