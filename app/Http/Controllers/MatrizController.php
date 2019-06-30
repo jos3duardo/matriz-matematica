@@ -43,7 +43,6 @@ class MatrizController extends Controller
                 ];
             }
         }
-dd($teste);
 
         if ($linha == $coluna){
             $matriz->tipo = 'Quadrada';
