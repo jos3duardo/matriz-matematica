@@ -2,7 +2,7 @@
 @section('content')
     <hr>
     <a class=" btn btn-warning" data-toggle="modal" data-target="#gerarMatrizModal">
-        <i class="fas fa-folder-plus"></i> Gerar uma Nova Matriz
+        <i class="fas fa-folder-plus"></i> Criar Matriz
     </a>
     <hr>
     {{-- Matrizes geradas--}}
@@ -51,7 +51,7 @@
         <div class="modal-dialog modal-dialog-scrollable"  role="document">
             <div class="modal-content modal-lg">
                 <div class="modal-header">
-                    <h4>Gerar matriz</h4>
+                    <h4>Gerar uma nova matriz</h4>
                 </div>
                 <div class="modal-body">
                     <div class="card">
