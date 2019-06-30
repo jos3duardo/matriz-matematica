@@ -94,7 +94,7 @@
         if (coluna.value <= 0 || linha.value <= 0) {
             // impede o envio do form
             e.preventDefault();
-            alert('Os campos coluna e linha tem que ser maior 0')
+            alert('Os campos coluna e linha devem ser maior 0 !')
         }
     });
 </script>
