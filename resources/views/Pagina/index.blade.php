@@ -6,15 +6,15 @@
             <h4>Gerar matriz</h4>
         </div>
         <div class="card-body">
-            <form action="{{route('gerarMatriz')}}" method="post">
+            <form action="{{route('gerarMatriz')}}" method="post" id="formGeraMatriz">
                 @csrf
                 <div class="form-row">
 
                     <div class="col">
-                        <input type="number" class="form-control" name="linhas" placeholder="Número de Linhas" required autofocus>
+                        <input type="number" class="form-control" id="linha" name="linhas" placeholder="Número de Linhas" required autofocus>
                     </div>
                     <div class="col">
-                        <input type="number" class="form-control" name="colunas" placeholder="Número de Colunas" required>
+                        <input type="number" class="form-control" id="coluna" name="colunas" placeholder="Número de Colunas" required>
                     </div>
                 </div>
                 <hr>
@@ -65,4 +65,21 @@
         </div>
     </div>
 </div>
+
+<script>
+        //validando campo da linha e da coluna na hora de criar uma matriz
+        //para não deixar criar uma matriz nula
+        var formGeraMatriz = document.getElementById('formGeraMatriz');
+        var coluna = document.getElementById('coluna');
+        var linha = document.getElementById('linha');
+        formGeraMatriz.addEventListener('submit', function (e) {
+            // alerta o valor do campo
+            if (coluna >= 0 || linha >= 0) {
+                alert('Os campos coluna e linha tem que ser maior 0')
+            }
+            // impede o envio do form
+            e.preventDefault();
+        });
+    //fim da validação do campo da linha e da coluna
+</script>
 @endsection
