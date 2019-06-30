@@ -48,7 +48,7 @@
             <div id="Inversa" style="display: none">
                 <div class="card"  style="text-align: center">
                     <div class="card-header"  style="background-color: #28a745;border-color:#28a745 ">
-                        <h4 class="card-title">Matriz Inversa</h4>
+                        <h4 class="card-title">Inversa</h4>
                     </div>
                     <div class="card-body alert-success">
                         @php
@@ -74,7 +74,7 @@
             <div id="Transposta" style="display: none">
             <div class="card"  style="text-align: center">
                 <div class="card-header" style="background-color: #ffc107;border-color: #ffc107">
-                    <h4 class="card-title">Matriz Transposta</h4>
+                    <h4 class="card-title">Transposta</h4>
                 </div>
                 <div class="card-body alert-warning"  >
                     @php
@@ -102,7 +102,7 @@
             <div id="Inversa" style="display: block">
                 <div class="card"  style="text-align: center">
                     <div class="card-header">
-                        <h4 class="card-title">Matriz x {{$numero}} </h4>
+                        <h4 class="card-title">Multplicada x {{$numero}} </h4>
 
                     </div>
                     <div class="card-body">
