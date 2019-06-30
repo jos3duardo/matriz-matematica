@@ -35,6 +35,9 @@ class MatrizController extends Controller
         if ($linha == $coluna){
             $matriz->tipo = 'Quadrada';
         }
+        else{
+            $matriz->tipo = 'Sem tipo definido ';
+        }
         if ($matriz->save()){
             $dadosMatriz = new dadosMatriz();
             $dadosMatriz->matrizs_id = $matriz->id;
@@ -48,12 +51,13 @@ class MatrizController extends Controller
         foreach ($dadosJson as $key => $dados){
             $nula += $dados * 1;
         }
-        if ($nula > 0){
+
+        //valida os dados da matriz caso os valores sejam 0
+        if ($nula == 0){
             $matriz = Matriz::find($matriz->id);
-            $matriz->tipo = 'Nula';
+            $matriz->tipo .= ' Nula';
             $matriz->save();
         }
-
         return redirect(route('index'))->with('success','A matriz foi apagada com sucesso!');
     }
     public function Ver($id){
@@ -61,7 +65,6 @@ class MatrizController extends Controller
         $dados = dadosMatriz::where([
             'matrizs_id' => $matriz->id
         ])->get();
-
         $dadosMatriz = $dados[0]->dados;
         $dadosJson = json_decode($dadosMatriz);
         $inversa = array();
@@ -70,11 +73,8 @@ class MatrizController extends Controller
         }
         return view('Matriz.Ver',compact('dadosJson','dados','matriz','inversa'));
     }
-
     public function multiplicar(Request $request, $id){
-
         $numero = $request->numero;
-
         $matriz = Matriz::find($id);
         $dados = dadosMatriz::where([
             'matrizs_id' => $matriz->id
@@ -111,55 +111,39 @@ class MatrizController extends Controller
             $multiplicacao[$key] = ($dados * $numero);
         }
         return view('Matriz.Ver',compact('dadosJson','dados','matriz','inversa','multiplicacao','numero'));
-
     }
     public function Inversa($id){
         $matriz = Matriz::find($id);
         $dados = dadosMatriz::where([
             'matrizs_id' => $matriz->id
         ])->get();
-
         $dadosMatriz = $dados[0]->dados;
         $dadosJson = json_decode($dadosMatriz);
         $inversa = array();
         foreach ($dadosJson as $key => $dados){
             $inversa[$key] = ($dados * (-1));
         }
-
-//        dd($inversa);
-//        return view('Matriz.Inversa',compact('dadosJson','dados','matriz','inversa'));
         return view('Matriz.ver',compact('dadosJson','dados','matriz','inversa'));
     }
-
-
     public function Transposta($id){
-
         $matriz = Matriz::find($id);
         $dados = dadosMatriz::where([
             'matrizs_id' => $matriz->id
         ])->get();
-
         $dadosMatriz = $dados[0]->dados;
         $dadosJson = json_decode($dadosMatriz);
-
         return view('Matriz.Transposta',compact('dadosJson','dados','matriz'));
     }
-
     public function destroy($id){
         $matriz = Matriz::find($id);
-
         $dados = dadosMatriz::where([
             'matrizs_id' => $matriz->id
         ])->first();
-
         $dados->delete();
-
         if($matriz->delete()){
-
             return redirect(route('index'))->with('success','A matriz e todos os seus dados foram apagada com sucesso!');
         }else{
             return redirect(route('index'))->with('success','A matriz não pode ser apagada!');
         }
     }
-
 }
