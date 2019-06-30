@@ -69,6 +69,27 @@ dd($teste);
         }
         return view('Matriz.Ver',compact('dadosJson','dados','matriz','inversa'));
     }
+
+    public function multiplicar(Request $request, $id){
+        $numero = $request->numero;
+
+        $matriz = Matriz::find($id);
+        $dados = dadosMatriz::where([
+            'matrizs_id' => $matriz->id
+        ])->get();
+        $dadosMatriz = $dados[0]->dados;
+        $dadosJson = json_decode($dadosMatriz);
+        $inversa = array();
+        foreach ($dadosJson as $key => $dados){
+            $inversa[$key] = ($dados * (-1));
+        }
+        $multiplicacao = array();
+        foreach ($dadosJson as $key => $dados){
+            $multiplicacao[$key] = ($dados * $numero);
+        }
+        return view('Matriz.Ver',compact('dadosJson','dados','matriz','inversa','multiplicacao','numero'));
+
+    }
     public function Inversa($id){
         $matriz = Matriz::find($id);
         $dados = dadosMatriz::where([
