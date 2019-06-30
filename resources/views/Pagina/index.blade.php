@@ -23,8 +23,7 @@
         </div>
     </div>
 </div>
-
-    {{-- Matrizes geradas--}}
+{{-- Matrizes geradas--}}
 <div class="align-items-center pt-3 pb-2 mb-3 border-bottom">
     <div class="card">
         <div class="card-header">
@@ -52,8 +51,8 @@
                             <td>{{($matriz->tipo ? $matriz->tipo : "Sem tipo definido") }}</td>
                             <td>{{$matriz->created_at->format('d/m/Y h:i:s')}}</td>
                             <td>
-                                <a href="{{route('ver', ['id' => $matriz->id])}}" class="btn btn-success btn-sm"><i class="fas fa-eye"></i></a>
-                                <a href="{{route('destroy',['id' => $matriz->id])}}" onclick="return confirm('Deseja excluir esta matriz')" class="btn btn-danger btn-sm"><i class="fas fa-trash-alt"></i></a>
+                                <a href="{{route('ver', ['id' => $matriz->id])}}" class="btn btn-success btn-sm"><i class="fas fa-eye"></i>Ver</a>
+                                <a href="{{route('destroy',['id' => $matriz->id])}}" onclick="return confirm('Deseja excluir esta matriz')" class="btn btn-danger btn-sm"><i class="fas fa-trash-alt"></i>Apagar</a>
                             </td>
                         </tr>
                     @endforeach
@@ -74,12 +73,12 @@
         var linha = document.getElementById('linha');
         formGeraMatriz.addEventListener('submit', function (e) {
             // alerta o valor do campo
-            if (coluna >= 0 || linha >= 0) {
+            // alert(coluna.value+linha.value)
+            if (coluna.value <= 0 || linha.value <= 0) {
+                // impede o envio do form
+                e.preventDefault();
                 alert('Os campos coluna e linha tem que ser maior 0')
             }
-            // impede o envio do form
-            e.preventDefault();
         });
-    //fim da validação do campo da linha e da coluna
 </script>
 @endsection

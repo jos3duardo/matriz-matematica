@@ -1,3 +1,3 @@
 <nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow text-center" >
-    <a class="navbar-brand col-sm-3 col-md-2 mr-0 text-center"  href="{{route('index')}}">Sistema de Matriz - IFMS - Fundamentos Matematicos</a>
+    <a class="navbar-brand col-sm-3 col-md-2 mr-0 text-center bg-dark lex-md-nowrap"  href="{{route('index')}}">Sistema de Matriz - IFMS - Fundamentos Matematicos</a>
 </nav>

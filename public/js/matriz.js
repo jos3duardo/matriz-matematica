@@ -28,16 +28,7 @@ window.onload=function () {
     })
 
 
-    var form = document.getElementById('matriz');
-    var campo = document.getElementById('dado');
 
-    form.addEventListener('submit', function(e) {
-        // alerta o valor do campo
-        console.log(campo.value);
-
-        // impede o envio do form
-        e.preventDefault();
-    });
 
 }
 
