@@ -8,7 +8,7 @@ Route::post('/gravar/matriz/{linha}/{coluna}/','MatrizController@gravarMatriz')-
 Route::get('/ver/{id}', 'MatrizController@Ver')->name('ver');
 //Route::get('/inversa/{id}', 'MatrizController@Inversa')->name('inversa');
 //Route::get('/transposta/{id}', 'MatrizController@Transposta')->name('transposta');
-Route::post('/multiplicar/{id}', 'MatrizController@multiplicar')->name('multiplicar');
+Route::get('/multiplicar/{id}', 'MatrizController@multiplicar')->name('multiplicar');
 Route::get('/multiplicar/form/{id}', 'MatrizController@multiplicarForm')->name('multiplicarForm');
 
 
