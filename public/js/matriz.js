@@ -12,7 +12,8 @@ function transposta(el) {
     else
         document.getElementById(el).style.display = 'block';
 }
-function AddMatriz(el) {
+function addMatriz('#divPrincipal') {
+    alert('divi')
     var display = document.getElementById(el).style.display;
     if(display == "block")
         document.getElementById(el).style.display = 'none';
