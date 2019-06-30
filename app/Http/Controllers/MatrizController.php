@@ -22,29 +22,16 @@ class MatrizController extends Controller
     {
         $linha = $request->input('linhas');
         $coluna = $request->input('colunas');
+        
         return view('Matriz.preencher', compact('linha', 'coluna'));
     }
 
     public function gravarMatriz(Request $request, $linha, $coluna)
     {
-
-//        dd($request, $linha, $coluna);
         $dados = json_encode($request->input('valores'));
         $matriz = new Matriz();
         $matriz->linhas = $linha;
         $matriz->colunas = $coluna;
-
-
-
-        for ($i = 1; $i <= $linha; $i++){
-            for ($j = 1; $j <= $coluna; $j++){
-                $teste = [
-                    $coluna[$i] => $j
-                ];
-            }
-        }
-dd($teste);
-
         if ($linha == $coluna){
             $matriz->tipo = 'Quadrada';
         }
@@ -54,6 +41,19 @@ dd($teste);
             $dadosMatriz->dados = $dados;
             $dadosMatriz->save();
         }
+        //verificado se a matriz é nula
+        $nula = 0;
+        $dadosMatriz = $dadosMatriz->dados;
+        $dadosJson = json_decode($dadosMatriz);
+        foreach ($dadosJson as $key => $dados){
+            $nula += $dados * 1;
+        }
+        if ($nula > 0){
+            $matriz = Matriz::find($matriz->id);
+            $matriz->tipo = 'Nula';
+            $matriz->save();
+        }
+
         return redirect(route('index'))->with('success','A matriz foi apagada com sucesso!');
     }
     public function Ver($id){
@@ -61,8 +61,10 @@ dd($teste);
         $dados = dadosMatriz::where([
             'matrizs_id' => $matriz->id
         ])->get();
+
         $dadosMatriz = $dados[0]->dados;
         $dadosJson = json_decode($dadosMatriz);
+        dd($dadosJson);
         $inversa = array();
         foreach ($dadosJson as $key => $dados){
             $inversa[$key] = ($dados * (-1));

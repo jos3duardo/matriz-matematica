@@ -6,15 +6,15 @@
             <h4>Gerar matriz</h4>
         </div>
         <div class="card-body">
-            <form action="{{route('gerarMatriz')}}" method="post">
+            <form action="{{route('gerarMatriz')}}" method="post" id="formGeraMatriz">
                 @csrf
                 <div class="form-row">
 
                     <div class="col">
-                        <input type="number" class="form-control" name="linhas" placeholder="Número de Linhas" required autofocus>
+                        <input type="number" class="form-control" id="linha" name="linhas" placeholder="Número de Linhas" required autofocus>
                     </div>
                     <div class="col">
-                        <input type="number" class="form-control" name="colunas" placeholder="Número de Colunas" required>
+                        <input type="number" class="form-control" id="coluna" name="colunas" placeholder="Número de Colunas" required>
                     </div>
                 </div>
                 <hr>
