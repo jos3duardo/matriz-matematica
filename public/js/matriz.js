@@ -5,7 +5,7 @@ function Inversa(el) {
     else
         document.getElementById(el).style.display = 'block';
 }
-function Transposta(el) {
+function transposta(el) {
     var display = document.getElementById(el).style.display;
     if(display == "block")
         document.getElementById(el).style.display = 'none';
