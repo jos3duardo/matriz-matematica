@@ -58,7 +58,7 @@ class MatrizController extends Controller
             $matriz->tipo .= ' Nula';
             $matriz->save();
         }
-        return redirect(route('index'))->with('success','A matriz foi apagada com sucesso!');
+        return redirect(route('index'))->with('success','A matriz foi gerada com sucesso!');
     }
     public function Ver($id){
         $matriz = Matriz::find($id);
@@ -141,9 +141,9 @@ class MatrizController extends Controller
         ])->first();
         $dados->delete();
         if($matriz->delete()){
-            return redirect(route('index'))->with('success','A matriz e todos os seus dados foram apagada com sucesso!');
+            return redirect(route('index'))->with('error','A matriz e todos os seus dados foram apagada com sucesso!');
         }else{
-            return redirect(route('index'))->with('success','A matriz não pode ser apagada!');
+            return redirect(route('index'))->with('error','A matriz não pode ser apagada!');
         }
     }
 }
