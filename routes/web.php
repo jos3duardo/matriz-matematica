@@ -10,5 +10,6 @@ Route::get('/ver/{id}', 'MatrizController@Ver')->name('ver');
 //Route::get('/transposta/{id}', 'MatrizController@Transposta')->name('transposta');
 Route::post('/multiplicar/{id}', 'MatrizController@multiplicar')->name('multiplicar');
 Route::get('/multiplicar/form/{id}', 'MatrizController@multiplicarForm')->name('multiplicarForm');
+Route::post('/calcular/{id}', 'MatrizController@calcularMatriz')->name('calcularMatriz');
 
 
