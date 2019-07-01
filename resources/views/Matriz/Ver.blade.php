@@ -105,6 +105,13 @@
                 @if($matriz->tipo == 'Quadrada Nula' || $matriz->tipo == 'Quadrada')
                     <a class="btn btn-sm btn-primary"><i class="far fa-hourglass"></i> simetria</a>
                 @endif
+                @if($matriz->linhas == 2 && $matriz->colunas == 2)
+                    <a class="btn btn-sm btn-danger" data-toggle="modal" data-target="#ordem2MatrizModal" title="Mostar determinante da Matriz"><i class="far fa-hourglass"></i> Determinante</a>
+                @endif
+                @if($matriz->linhas == 3 && $matriz->colunas == 3)
+                    <a class="btn btn-sm btn-danger" data-toggle="modal" data-target="#ordem3MatrizModal" title="Mostar determinante da Matriz"><i class="far fa-hourglass"></i> Determinante</a>
+                @endif
+
                 <a style="border-color: black" data-toggle="modal" data-target="#numeroMatrizModal" class="btn btn-sm"><i class="fas fa-times"></i> Multiplicar</a>
             </div>
         </div>
@@ -217,26 +224,26 @@
         </div>
     </div>
     <div>
-    <!-- Modal pegando valor para multiplicar a matriz-->
-    <div class="modal fade" id="numeroMatrizModal" tabindex="-1" role="dialog" aria-labelledby="numeroMatrizModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-scrollable"  role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4>Informe um número para multiplicar a Matriz</h4>
-                </div>
-                <div class="modal-body">
-                    <form action="{{route('multiplicar',['id'=> $matriz->id])}}" method="post" id="multplicarMatriz">
-                        @csrf
-                        <label for="numero">Número</label>
-                        <input type="text" name="numero" id="numero" >
-                        <button type="submit"  id="enviar" class="btn btn-dark btn-sm">Multiplicar</button>
-                    </form>
+        <!-- Modal pegando valor para multiplicar a matriz-->
+        <div class="modal fade" id="numeroMatrizModal" tabindex="-1" role="dialog" aria-labelledby="numeroMatrizModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-scrollable"  role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4>Informe um número para multiplicar a Matriz</h4>
+                    </div>
+                    <div class="modal-body">
+                        <form action="{{route('multiplicar',['id'=> $matriz->id])}}" method="post" id="multplicarMatriz">
+                            @csrf
+                            <label for="numero">Número</label>
+                            <input type="text" name="numero" id="numero" >
+                            <button type="submit"  id="enviar" class="btn btn-dark btn-sm">Multiplicar</button>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-    <!-- Modal infos da matriz-->
-    <div class="modal fade" id="dadosMatrizModal" tabindex="-1" role="dialog" aria-labelledby="dadosMatrizModalLabel" aria-hidden="true">
+        <!-- Modal infos da matriz-->
+        <div class="modal fade" id="dadosMatrizModal" tabindex="-1" role="dialog" aria-labelledby="dadosMatrizModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-xl" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -253,5 +260,53 @@
                 </div>
             </div>
         </div>
-     </div>
+        {{--inicio matriz determinante 2 de uma matriz --}}
+        <div class="modal fade" id="ordem2MatrizModal" tabindex="-1" role="dialog" aria-labelledby="ordem2MatrizModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-xl" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h2>Determinante de uma Matriz de ordem 2</h2>
+                    </div>
+                    <div class="modal-body">
+                        <div class="list-group-vertical-sm">
+                            @php
+                                $ordem2 = 0;
+                                $ordem2 = ($dadosJson[0]*$dadosJson[3])-($dadosJson[1]*$dadosJson[2]);
+                            @endphp
+                            <h4>A determinante da matriz é: {{$ordem2}}</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {{--inicio matriz determinante 3 de uma matriz --}}
+        @if($matriz->linhas == 3 && $matriz->colunas == 3)
+        <div class="modal fade" id="ordem3MatrizModal" tabindex="-1" role="dialog" aria-labelledby="ordem2MatrizModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-xl" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h2>Determinante de uma Matriz de ordem 3</h2>
+                    </div>
+                    <div class="modal-body">
+                        <div class="list-group-vertical-sm">
+                            @php
+                                $ordem3 = 0;
+                                $linha1 = 0;
+                                $linha2 = 0;
+                                $linha1 = ($dadosJson[0]*$dadosJson[4]*$dadosJson[8])+($dadosJson[1]*$dadosJson[5]*$dadosJson[6])+($dadosJson[2]*$dadosJson[3]*$dadosJson[7]);
+                                $linha2 = ($dadosJson[1]*$dadosJson[3]*$dadosJson[8])+($dadosJson[0]*$dadosJson[5]*$dadosJson[7])+($dadosJson[2]*$dadosJson[4]*$dadosJson[6]);
+                                $ordem3 = $linha1-$linha2;
+                            @endphp
+                            <h4>A determinante da matriz é: {{$ordem3}}</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        @endif
+    </div>
+
+
+
 @endsection
