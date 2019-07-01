@@ -25,7 +25,7 @@ class MatrizController extends Controller
         
         return view('Matriz.preencher', compact('linha', 'coluna'));
     }
-
+    //grava uma matriz e seus dados no bando de dados
     public function gravarMatriz(Request $request, $linha, $coluna)
     {
         $dados = json_encode($request->input('valores'));
@@ -60,6 +60,7 @@ class MatrizController extends Controller
         }
         return redirect(route('index'))->with('success','A matriz foi gerada com sucesso!');
     }
+    //mostra os dados de uma matriz
     public function Ver($id){
         $matriz = Matriz::find($id);
         $dados = dadosMatriz::where([
@@ -73,12 +74,17 @@ class MatrizController extends Controller
         }
         return view('Matriz.Ver',compact('dadosJson','dados','matriz','inversa'));
     }
+    //função que realiza a multiplicação de uma matriz
     public function multiplicar(Request $request, $id){
+        //numero pelo qual  a matriz sera multiplicado
         $numero = $request->numero;
+        //procura a matriz com o id que é enviado
         $matriz = Matriz::find($id);
+        //procura os dados da matriz
         $dados = dadosMatriz::where([
             'matrizs_id' => $matriz->id
         ])->get();
+        //pega somente os valores
         $dadosMatriz = $dados[0]->dados;
         $dadosJson = json_decode($dadosMatriz);
         $inversa = array();
@@ -92,6 +98,9 @@ class MatrizController extends Controller
         return view('Matriz.Ver',compact('dadosJson','dados','matriz','inversa','multiplicacao','numero'));
 
     }
+    //esta função não esta sendo utilizada
+    //mas ela pode ser ativada a qualquer momento
+    //ela faz a multiplicação da matriz por um numero que é informado dentro do formulario
     public function multiplicarForm(Request $request, $id){
         $numero = $request->numero;
         $matriz = Matriz::find($id);
@@ -100,18 +109,25 @@ class MatrizController extends Controller
         ])->get();
         //dados da matriz multiplicada
         $dadosNovos = $request->valor;
+        //pega somente os numeros
         $dadosMatriz = $dados[0]->dados;
+        //transforma em um array
         $dadosJson = json_decode($dadosMatriz);
+        //calcula a inversa para deixar ela disponivel na pagina
         $inversa = array();
         foreach ($dadosJson as $key => $dados){
             $inversa[$key] = ($dados * (-1));
         }
+        //variavel que ira armazenar o resultado da multiplicação
         $multiplicacao = array();
+        //realiza a multiplicação
         foreach ($dadosJson as $key => $dados){
             $multiplicacao[$key] = ($dados * $numero);
         }
         return view('Matriz.Ver',compact('dadosJson','dados','matriz','inversa','multiplicacao','numero'));
     }
+
+    //por enquanto não esta sendo usada esta função os calculos estão sendo feitos direto na pagina
     public function Inversa($id){
         $matriz = Matriz::find($id);
         $dados = dadosMatriz::where([
@@ -125,6 +141,7 @@ class MatrizController extends Controller
         }
         return view('Matriz.ver',compact('dadosJson','dados','matriz','inversa'));
     }
+    //por enquanto não esta sendo usada esta função os calculos estão sendo feitos direto na pagina
     public function Transposta($id){
         $matriz = Matriz::find($id);
         $dados = dadosMatriz::where([
@@ -134,6 +151,47 @@ class MatrizController extends Controller
         $dadosJson = json_decode($dadosMatriz);
         return view('Matriz.Transposta',compact('dadosJson','dados','matriz'));
     }
+    //função que realiza o calculo de uma matriz, usa como opcao enviada via request para retornar o valor apos os calculos
+    public function calcularMatriz(Request $request, $id){
+
+        //recebe a opcao enviada pelo request
+        $opcao = $request->opcao;
+        //recebe os dados que seram usados para fazer o calcula da matriz
+        $dados2 = $request->dado2;
+        //procura a matriz com o id que é enviado
+        $matriz = Matriz::find($id);
+        //procura os dados da matriz
+        $dados = dadosMatriz::where([
+            'matrizs_id' => $matriz->id
+        ])->get();
+        //pega somente os numeros
+        $dadosMatriz = $dados[0]->dados;
+        //converte em um array
+        $dadosJson = json_decode($dadosMatriz);
+
+        //calcula a inversa para deixar ela disponivel na pagina
+        $inversa = array();
+        foreach ($dadosJson as $key => $dados){
+            $inversa[$key] = ($dados * (-1));
+        }
+        //variavel que ira guardar o resultado
+        $resultado = array();
+        //caso a opcao seja somar
+        if ($opcao == 'somar'){
+            foreach ($dadosJson as $key => $dados){
+                $resultado[$key] = $dados + $dados2[$key];
+            }
+        }
+        //caso a opcao sena subtrair
+        if ($opcao == 'subtrair'){
+            foreach ($dadosJson as $key => $dados){
+                $resultado[$key] = $dados - $dados2[$key];
+            }
+        }
+        return view('Matriz.Ver',compact('dadosJson','dados','matriz','inversa','multiplicacao','numero','resultado'));
+
+    }
+    //apaga uma matriz e todos os dados que existem nela
     public function destroy($id){
         $matriz = Matriz::find($id);
         $dados = dadosMatriz::where([
