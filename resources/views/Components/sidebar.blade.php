@@ -2,17 +2,16 @@
     <div class="sidebar-sticky">
         <ul class="nav flex-column">
             <li class="nav-item">
-                <a href="{{route('index')}}" class=" nav-link btn btn-danger">
-                    <span class="fas fa-home"></span>
+                <a href="{{route('index')}}" class=" nav-link">
+                    <i class="fas fa-home"></i>
                     Home
                 </a>
             </li>
             <li class="nav-item">
-                <a type="button" class=" nav-link btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                <a class="nav-link" data-toggle="modal" data-target="#exampleModal">
                     <i class="fas fa-bars"></i> Itens Avaliados
                 </a>
             </li>
-
         </ul>
     </div>
 </nav>
