@@ -261,6 +261,7 @@
             </div>
         </div>
         {{--inicio matriz determinante 2 de uma matriz --}}
+        @if($matriz->linhas > 1 && $matriz->colunas > 1)
         <div class="modal fade" id="ordem2MatrizModal" tabindex="-1" role="dialog" aria-labelledby="ordem2MatrizModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-xl" role="document">
                 <div class="modal-content">
@@ -279,9 +280,9 @@
                 </div>
             </div>
         </div>
-
+        @endif
         {{--inicio matriz determinante 3 de uma matriz --}}
-        @if($matriz->linhas == 3 && $matriz->colunas == 3)
+        @if($matriz->linhas == 3 && $matriz->colunas == 3 )
         <div class="modal fade" id="ordem3MatrizModal" tabindex="-1" role="dialog" aria-labelledby="ordem2MatrizModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-xl" role="document">
                 <div class="modal-content">
