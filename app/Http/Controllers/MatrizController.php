@@ -204,4 +204,15 @@ class MatrizController extends Controller
             return redirect(route('index'))->with('error','A matriz não pode ser apagada!');
         }
     }
+    public function editar(Request $request, $id){
+        $dados = json_encode($request->input('numeros'));
+        $matriz = Matriz::find($id);
+        if ($matriz->save()){
+            $dadosMatriz = dadosMatriz::find($matriz->id);
+            $dadosMatriz->matrizs_id = $matriz->id;
+            $dadosMatriz->dados = $dados;
+            $dadosMatriz->save();
+        }
+        return redirect(route('index'))->with('success','Matriz editada com sucesso!');
+    }
 }

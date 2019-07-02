@@ -26,18 +26,19 @@
                                 <h4>Matriz 1</h4>
                             </div>
                             <div class="card-body">
-                                <form action="">
-                                @foreach($dadosJson as $key => $dado)
-                                    <input  type="text" class="inputMatriz" id="dado" value="{{$dado}}">
-                                    @if($colunas == $auxiliar )
-                                        <br/>
-                                        <?php   $colunas+=$matriz->colunas;?>
-                                    @endif
-                                    <?php
-                                    $auxiliar++;
-                                    ?>
-                                @endforeach
-                                <br>
+                                <form action="{{route('editar',['id' => $matriz->id])}}" method="post">
+                                    @csrf
+                                    @foreach($dadosJson as $key => $dado)
+                                        <input  type="text" class="inputMatriz" id="dado" name="numeros[]" value="{{$dado}}">
+                                        @if($colunas == $auxiliar )
+                                            <br/>
+                                            <?php   $colunas+=$matriz->colunas;?>
+                                        @endif
+                                        <?php
+                                        $auxiliar++;
+                                        ?>
+                                    @endforeach
+                                    <br>
                                 <button type="submit" class="btn btn-sm btn-primary"><i class="fas fa-edit"></i> Editar</button>
                                 </form>
                             </div>
