@@ -2,10 +2,10 @@
 @section('content')
     <hr>
     <a href="{{route('index')}}" class="btn btn-dark"><i class="fas fa-chevron-left"></i> Voltar</a>
-    <a href="#" onclick="alert('Em desenvolvimento')" class="btn btn-warning" id="addLinha">+ linha</a>
-    <a href="#" onclick="alert('Em desenvolvimento')" class="btn btn-danger" id="removeLinha">- linha</a>
+    <a href="#" onclick="alert('Em desenvolvimento')" class="btn btn-warning disabled" id="addLinha" >+ linha</a>
+    <a href="#" onclick="alert('Em desenvolvimento')" class="btn btn-danger disabled" id="removeLinha">- linha</a>
     <hr>
-            <div class="card">
+            <div class="card justify-content-center" style="text-align: center">
                 <div class="card-header">
                     <h3>Preencher a Matriz <small>( {{$linha}} linhas X {{$coluna}} colunas)</small></h3>
                 </div>
