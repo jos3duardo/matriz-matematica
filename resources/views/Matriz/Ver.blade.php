@@ -9,6 +9,12 @@
             <i class="fas fa-plus"></i> Soma - Sub - Mult
         </a>
     <hr>
+
+    @if (isset($traco))
+        <div class="alert alert-success" role="alert">
+            <h5> O traço da matriz é: {{ $traco }}</h5>
+        </div>
+    @endif
     <div class="align-items-center pt-3 pb-2 mb-3 border-bottom">
         <div class="card" style="text-align: center" >
             <div class="card-header">
@@ -39,7 +45,7 @@
                                         ?>
                                     @endforeach
                                     <br>
-                                <button type="submit" class="btn btn-sm btn-primary"><i class="fas fa-edit"></i> Editar</button>
+                                <button type="submit" class="btn btn-sm btn-primary"><i class="fas fa-save"></i> Salvar</button>
                                 </form>
                             </div>
                         </div>
@@ -103,10 +109,10 @@
                 </div>
             </div>
             <div class="card-footer">
-                <a onclick="mostrarDiv('Inversa')" class="btn btn-sm btn-success"><i class="fas fa-exchange-alt"></i> Inversa</a>
                 <a onclick="mostrarDiv('transposta')" class="btn btn-sm btn-warning"><i class="fas fa-retweet"></i> Transposta</a>
                 @if($matriz->tipo == 'Quadrada Nula' || $matriz->tipo == 'Quadrada')
-                    <a class="btn btn-sm btn-dark" data-toggle="modal" data-target="#tracoMatrizModal"><i class="fas fa-wave-square"></i> Traço</a>
+                    <a onclick="mostrarDiv('Inversa')" class="btn btn-sm btn-success"><i class="fas fa-exchange-alt"></i> Inversa</a>
+                    <a href="{{route('traco',['id' => $matriz->id, 'colunas' => $matriz->colunas])}}" class="btn btn-sm btn-dark"><i class="fas fa-wave-square"></i> Traço</a>
                 @endif
                 @if($matriz->linhas == 2 && $matriz->colunas == 2)
                     <a class="btn btn-sm btn-danger" data-toggle="modal" data-target="#ordem2MatrizModal" title="Mostar determinante da Matriz"><i class="far fa-hourglass"></i> Determinante</a>
@@ -303,25 +309,6 @@
                                 $ordem3 = $linha1-$linha2;
                             @endphp
                             <h4>A determinante da matriz é: {{$ordem3}}</h4>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        @endif
-        @if($matriz->tipo == 'Quadrada Nula' || $matriz->tipo == 'Quadrada')
-            <div class="modal fade" id="tracoMatrizModal" tabindex="-1" role="dialog" aria-labelledby="tracoMatrizModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-xl" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h2>O traço de uma Matriz quadrada</h2>
-                    </div>
-                    <div class="modal-body">
-                        <div class="list-group-vertical-sm">
-                            @php
-
-                            @endphp
-                            <h4>O traço da matriz é: </h4>
                         </div>
                     </div>
                 </div>

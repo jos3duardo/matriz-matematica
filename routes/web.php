@@ -11,3 +11,4 @@ Route::get('/multiplicar/form/{id}', 'MatrizController@multiplicarForm')->name('
 Route::post('/calcular/{id}', 'MatrizController@calcularMatriz')->name('calcularMatriz');
 
 Route::post('/edit/{id}','MatrizController@editar')->name('editar');
+Route::get('/traco/{id}/{coluna}','MatrizController@traco')->name('traco');
