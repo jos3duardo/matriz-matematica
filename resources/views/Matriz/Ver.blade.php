@@ -6,9 +6,7 @@
         <a href="#" class=" btn btn-sm btn-dark" data-toggle="modal" data-target="#dadosMatrizModal" title="Mostar dados da Matriz">
             <i class="fas fa-info-circle"></i> Dados da Matriz
         </a>
-        <a href="#" onclick="mostrarDiv('matriz2')" id="btnAddMatriz" class="btn btn-sm btn-dark" title="Somar, Subtrair ou Multiplicar uma Matriz">
-            <i class="fas fa-plus"></i> Soma - Sub - Mult
-        </a>
+
         <a href="#" onclick="mostrarDiv('editBtn')" id="btnAddMatriz" class="btn btn-sm btn-dark" title="Editar os numeros da Matriz">
             <i class="fas fa-edit"></i> Editar
         </a>
@@ -56,7 +54,7 @@
     {{--fim determinante de ordem 3--}}
     <div class="align-items-center pt-3 pb-2 mb-3 border-bottom">
         <div class="card" style="text-align: center" >
-            <div class="card-header">
+            <div class="card-header " >
                 <h4>Matriz - {{$matriz->linhas}} linhas  x {{$matriz->colunas}} Colunas </h4>
             </div>
             <div class="card-body">
@@ -67,10 +65,10 @@
                 <div class="row justify-content-center">
                     <div class="col-md-auto" id="matriz1" style="display: block">
                         <div class="card">
-                            <div class="card-header">
-                                <h4>Original</h4>
+                            <div class="card-header bg-dark">
+                                <h4 style="color: white">Original</h4>
                             </div>
-                            <div class="card-body">
+                            <div class="card-body alert-dark">
                                 <form action="{{route('editar',['id' => $matriz->id])}}" method="post">
                                     @csrf
                                     @foreach($dadosJson as $key => $dado)
@@ -84,7 +82,7 @@
                                         ?>
                                     @endforeach
                                     <br>
-                                <button type="submit" onclick="return confirm('Os dados da Matriz seram alterados e você será direcionado para a tela inicia! Deseja continuar?')" class="btn btn-sm btn-dark" id="editBtn" style="display: none"><i class="fas fa-save"></i> Salvar</button>
+                                <button type="submit" onclick="return confirm('Os dados da Matriz seram alterados! Deseja continuar?')" class="btn btn-sm btn-dark" id="editBtn" style="display: none"><i class="fas fa-save"></i> Salvar</button>
                                 </form>
                             </div>
                         </div>
@@ -93,10 +91,10 @@
                     @if(isset($multiplicacao))
                         <div class="col-md-auto" id="addMatriz" style="display: block">
                             <div class="card"  style="text-align: center">
-                                <div class="card-header">
-                                    <h4 class="card-title">Multplicada x {{$numero}} </h4>
+                                <div class="card-header bg-dark">
+                                    <h4 style="color: white">Multplicada x {{$numero}} </h4>
                                 </div>
-                                <div class="card-body">
+                                <div class="card-body alert-dark">
                                     @php
                                         $auxiliar=1;
                                         $colunas = $matriz->colunas;
@@ -124,10 +122,10 @@
                     {{-- inicio matriz 2--}}
                     <div class="col-md-auto" id="matriz2" style="display: none">
                         <div class="card">
-                            <div class="card-header fundo">
-                                <h4>Matriz 2</h4>
+                            <div class="card-header bg-dark">
+                                <h4 style="color:white;">Matriz 2</h4>
                             </div>
-                            <div class="card-body">
+                            <div class="card-body alert-dark">
                                 <form action="{{route('calcularMatriz',['id' => $matriz->id])}}" id="formCalculaMatriz" method="post">
                                     @csrf
                                     @foreach($dadosJson as $key => $dado)
@@ -150,12 +148,13 @@
                     </div>
                     {{-- fim matriz 2--}}
                     {{--inicio matriz oposta--}}
-                    <div class="col-md-auto" id="oposta" style="display: none">
+                    @if(isset($oposta))
+                    <div class="col-md-auto" id="oposta" style="display: block">
                         <div class="card"  style="text-align: center">
-                            <div class="card-header">
-                                <h4 class="card-title">Oposta</h4>
+                            <div class="card-header bg-dark">
+                                <h4 style="color: white">Oposta</h4>
                             </div>
-                            <div class="card-body">
+                            <div class="card-body alert-dark">
                                 @php
                                     $auxiliar=1;
                                     $colunas = $matriz->colunas;
@@ -175,29 +174,34 @@
                             </div>
                         </div>
                     </div>
+                    @endif
                     {{--fim matriz oposta--}}
                     {{--inicio matriz transposta--}}
-                    <div class="card" id="transposta" style="display: none">
-                        <div class="card-header">
-                            <h4 class="card-title">Transposta</h4>
+                    @if(isset($transposta))
+                        @if(count($transposta) >=    0  )
+                        <div class="card" id="transposta" style="display: block">
+                            <div class="card-header bg-dark">
+                                <h4 class="card-title" style="color: white">Transposta</h4>
+                            </div>
+                            <div class="card-body alert-dark">
+                                @php
+                                    $auxiliar=1;
+                                    $colunas = $matriz->linhas;
+                                @endphp
+                                @foreach($dadosJson as $key => $dado)
+                                    <input type="text" class="inputMatriz" value="{{$dado}}">
+                                    @if($colunas == $auxiliar )
+                                        <br/>
+                                        <?php
+                                        $colunas+=$matriz->linhas;
+                                        ?>
+                                    @endif
+                                    <?php $auxiliar++?>
+                                @endforeach
+                            </div>
                         </div>
-                        <div class="card-body">
-                            @php
-                                $auxiliar=1;
-                                $colunas = $matriz->linhas;
-                            @endphp
-                            @foreach($dadosJson as $key => $dado)
-                                <input type="text" class="inputMatriz" value="{{$dado}}">
-                                @if($colunas == $auxiliar )
-                                    <br/>
-                                    <?php
-                                    $colunas+=$matriz->linhas;
-                                    ?>
-                                @endif
-                                <?php $auxiliar++?>
-                            @endforeach
-                        </div>
-                    </div>
+                        @endif
+                    @endif
                     {{--fim matriz transposta--}}
                     {{-- inicio do resultado--}}
                     @if(isset($resultado))
@@ -232,8 +236,13 @@
             </div>
             {{--  inicio opcoes para as matrizes          --}}
             <div class="card-footer">
-                <a href="#" onclick="mostrarDiv('transposta')" class="btn btn-sm btn-dark"><i class="fas fa-retweet"></i> Transposta</a>
-                <a href="#" onclick="mostrarDiv('oposta')" class="btn btn-sm btn-dark"><i class="fas fa-yin-yang"></i> Oposta</a>
+                <a href="#" onclick="mostrarDiv('matriz2')" id="btnAddMatriz" class="btn btn-sm btn-dark" title="Somar, Subtrair ou Multiplicar uma Matriz">
+                    + Soma - Sub x Mult
+                </a>
+                <a href="{{route('transposta',['id' => $matriz->id])}}" class="btn btn-sm btn-dark"><i class="fas fa-retweet"></i> Transposta</a>
+                <a href="{{route('oposta',['id' => $matriz->id])}}" class="btn btn-sm btn-dark"><i class="fas fa-yin-yang"></i> Oposta</a>
+{{--                <a href="#" onclick="mostrarDiv('transposta')" class="btn btn-sm btn-dark"><i class="fas fa-retweet"></i> Transposta</a>--}}
+{{--                <a href="#" onclick="mostrarDiv('oposta')" class="btn btn-sm btn-dark"><i class="fas fa-yin-yang"></i> Oposta</a>--}}
             @if($matriz->tipo == 'Quadrada Nula' || $matriz->tipo == 'Quadrada')
                     {{-- validacao para a varialvel ordem2 --}}
                     @if(isset($ordem2))

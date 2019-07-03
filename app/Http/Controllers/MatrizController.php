@@ -65,11 +65,7 @@ class MatrizController extends Controller
         ])->get();
         $dadosMatriz = $dados[0]->dados;
         $dadosJson = json_decode($dadosMatriz);
-        $oposta = array();
-        foreach ($dadosJson as $key => $dados){
-            $oposta[$key] = ($dados * (-1));
-        }
-        return view('Matriz.Ver',compact('dadosJson','dados','matriz','oposta'));
+        return view('Matriz.Ver',compact('dadosJson','dados','matriz'));
     }
     //função que realiza a multiplicação de uma matriz
     public function multiplicar(Request $request, $id){
@@ -134,7 +130,7 @@ class MatrizController extends Controller
         foreach ($dadosJson as $key => $dados){
             $oposta[$key] = ($dados * (-1));
         }
-        return view('Matriz.ver',compact('dadosJson','dados','matriz','oposta'));
+        return view('Matriz.Ver',['id' => $matriz->id],compact('dadosJson','dados','matriz','oposta'));
     }
     //por enquanto não esta sendo usada esta função os calculos estão sendo feitos direto na pagina
     public function Transposta($id){
@@ -144,7 +140,9 @@ class MatrizController extends Controller
         ])->get();
         $dadosMatriz = $dados[0]->dados;
         $dadosJson = json_decode($dadosMatriz);
-        return view('Matriz.Transposta',compact('dadosJson','dados','matriz'));
+        $transposta = 0;
+
+        return view('Matriz.Ver',['id' => $matriz->id] ,compact('dadosJson','dados', 'transposta','matriz'));
     }
     //função que realiza o calculo de uma matriz, usa como opcao enviada via request para retornar o valor apos os calculos
     public function calcularMatriz(Request $request, $id){
@@ -201,24 +199,24 @@ class MatrizController extends Controller
     public function editar(Request $request, $id){
         $numeros = json_encode($request->input('numeros'));
         $matriz = Matriz::find($id);
-        if ($matriz->save()){
-            $dadosMatriz = dadosMatriz::find($matriz->id);
-            $dadosMatriz->matrizs_id = $matriz->id;
-            $dadosMatriz->dados = $numeros;
-            $dadosMatriz->save();
-        }
+
+        $dadosMatriz = dadosMatriz::find($matriz->id);
+        $dadosMatriz->matrizs_id = $matriz->id;
+        $dadosMatriz->dados = $numeros;
+        $dadosMatriz->save();
+
         $dados = dadosMatriz::where([
             'matrizs_id' => $matriz->id
         ])->get();
         $dadosMatriz = $dados[0]->dados;
         $dadosJson = json_decode($dadosMatriz);
         //calcula a $oposta para deixar ela disponivel na pagina
-        $oposta = array();
-        foreach ($dadosJson as $key => $dados){
-            $oposta[$key] = ($dados * (-1));
-        }
+//        $oposta = array();
+//        foreach ($dadosJson as $key => $dados){
+//            $oposta[$key] = ($dados * (-1));
+//        }
 
-        return view('Matriz.Ver',['id' => $matriz->id], compact('dados','oposta','matriz',   'dadosJson'  ))->with('success','Matriz editada com sucesso!');
+        return view('Matriz.Ver',['id' => $matriz->id], compact('dados','matriz',   'dadosJson'  ))->with('success','Matriz editada com sucesso!');
     }
     //calcula o traço de uma matriz quadrada
     public function traco($id,$colunaValor){
@@ -235,10 +233,10 @@ class MatrizController extends Controller
         //converte em um array
         $dadosJson = json_decode($dadosMatriz);
         //calcula a $oposta para deixar ela disponivel na pagina
-        $oposta = array();
-        foreach ($dadosJson as $key => $dados){
-            $oposta[$key] = ($dados * (-1));
-        }
+//        $oposta = array();
+//        foreach ($dadosJson as $key => $dados){
+//            $oposta[$key] = ($dados * (-1));
+//        }
         //variavel que ira guardar o resultado
         $traco = 0;
         $key = 0;
@@ -251,6 +249,6 @@ class MatrizController extends Controller
             }
             $key++;
         }
-        return view('Matriz.Ver',compact('dadosJson','dados','matriz','oposta','traco'));
+        return view('Matriz.Ver',compact('dadosJson','dados','matriz','traco'));
     }
 }
