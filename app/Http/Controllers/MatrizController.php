@@ -199,12 +199,12 @@ class MatrizController extends Controller
     }
     //edita uma matriz na view (Matriz.Ver)
     public function editar(Request $request, $id){
-        $dados = json_encode($request->input('numeros'));
+        $numeros = json_encode($request->input('numeros'));
         $matriz = Matriz::find($id);
         if ($matriz->save()){
             $dadosMatriz = dadosMatriz::find($matriz->id);
             $dadosMatriz->matrizs_id = $matriz->id;
-            $dadosMatriz->dados = $dados;
+            $dadosMatriz->dados = $ numeros;
             $dadosMatriz->save();
         }
         $dados = dadosMatriz::where([
