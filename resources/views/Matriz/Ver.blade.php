@@ -44,6 +44,7 @@
                             </div>
                         </div>
                     </div>
+                    {{-- inicio matriz 2--}}
                     <div class="col-md-auto" id="matriz2" style="display: none">
                         <div class="card">
                             <div class="card-header alert-success">
@@ -70,6 +71,7 @@
                             </div>
                         </div>
                     </div>
+                    {{-- inicio do resultado--}}
                     @if(isset($resultado))
                     <div class="col-md-auto" id="resultadoSoma" style="display: block">
                         <div class="card">
@@ -104,7 +106,7 @@
                 <a onclick="mostrarDiv('Inversa')" class="btn btn-sm btn-success"><i class="fas fa-exchange-alt"></i> Inversa</a>
                 <a onclick="mostrarDiv('transposta')" class="btn btn-sm btn-warning"><i class="fas fa-retweet"></i> Transposta</a>
                 @if($matriz->tipo == 'Quadrada Nula' || $matriz->tipo == 'Quadrada')
-                    <a class="btn btn-sm btn-primary"><i class="far fa-hourglass"></i> simetria</a>
+                    <a class="btn btn-sm btn-dark" data-toggle="modal" data-target="#tracoMatrizModal"><i class="fas fa-wave-square"></i> Traço</a>
                 @endif
                 @if($matriz->linhas == 2 && $matriz->colunas == 2)
                     <a class="btn btn-sm btn-danger" data-toggle="modal" data-target="#ordem2MatrizModal" title="Mostar determinante da Matriz"><i class="far fa-hourglass"></i> Determinante</a>
@@ -262,7 +264,7 @@
             </div>
         </div>
         {{--inicio matriz determinante 2 de uma matriz --}}
-        @if($matriz->linhas > 1 && $matriz->colunas > 1)
+        @if($matriz->linhas == 2 && $matriz->colunas == 2)
         <div class="modal fade" id="ordem2MatrizModal" tabindex="-1" role="dialog" aria-labelledby="ordem2MatrizModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-xl" role="document">
                 <div class="modal-content">
@@ -301,6 +303,25 @@
                                 $ordem3 = $linha1-$linha2;
                             @endphp
                             <h4>A determinante da matriz é: {{$ordem3}}</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        @endif
+        @if($matriz->tipo == 'Quadrada Nula' || $matriz->tipo == 'Quadrada')
+            <div class="modal fade" id="tracoMatrizModal" tabindex="-1" role="dialog" aria-labelledby="tracoMatrizModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-xl" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h2>O traço de uma Matriz quadrada</h2>
+                    </div>
+                    <div class="modal-body">
+                        <div class="list-group-vertical-sm">
+                            @php
+
+                            @endphp
+                            <h4>O traço da matriz é: </h4>
                         </div>
                     </div>
                 </div>
