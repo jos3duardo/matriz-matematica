@@ -20,7 +20,6 @@
                             <td>Linha</td>
                             <td>Coluna</td>
                             <td>Tipo</td>
-                            <td>Data</td>
                             <td>Ações</td>
                         </tr>
                         </thead>
@@ -31,10 +30,9 @@
                                 <td>{{$matriz->linhas}}</td>
                                 <td>{{$matriz->colunas}}</td>
                                 <td>{{($matriz->tipo ? $matriz->tipo : "Sem tipo definido") }}</td>
-                                <td>{{$matriz->created_at->format('d/m/Y h:i:s')}}</td>
                                 <td>
-                                    <a href="{{route('ver', ['id' => $matriz->id])}}" class="btn btn-success btn-sm"><i class="fas fa-eye"></i> Ver</a>
-                                    <a href="{{route('destroy',['id' => $matriz->id])}}" onclick="return confirm('Deseja excluir esta matriz')" class="btn btn-danger btn-sm"><i class="fas fa-trash-alt"></i> Apagar</a>
+                                    <a href="{{route('ver', ['id' => $matriz->id])}}" class="btn btn-success btn-sm"><i class="fas fa-eye"></i></a>
+                                    <a href="{{route('destroy',['id' => $matriz->id])}}" onclick="return confirm('Deseja excluir esta matriz')" class="btn btn-danger btn-sm"><i class="fas fa-trash-alt"></i></a>
                                 </td>
                             </tr>
                         @endforeach

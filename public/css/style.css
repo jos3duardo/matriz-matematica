@@ -1,3 +1,6 @@
 .inputMatriz{
     max-width:50px
 }
+.fundo{
+    background: url("../storage/img/navbar.jpg");
+}

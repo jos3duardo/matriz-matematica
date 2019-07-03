@@ -1,4 +1,4 @@
-<nav class="col-md-2 d-none d-md-block bg-light sidebar">
+<nav class="col-md-2 d-none d-md-block bg-light sidebar fundo">
     <div class="sidebar-sticky">
         <ul class="nav flex-column">
             <li class="nav-item">
@@ -8,7 +8,7 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" data-toggle="modal" data-target="#exampleModal">
+                <a href="#" class="nav-link" data-toggle="modal" data-target="#exampleModal">
                     <i class="fas fa-bars"></i> Itens Avaliados
                 </a>
             </li>
