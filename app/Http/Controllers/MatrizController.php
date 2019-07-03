@@ -207,7 +207,18 @@ class MatrizController extends Controller
             $dadosMatriz->dados = $dados;
             $dadosMatriz->save();
         }
-        return redirect(route('ver',['id' => $matriz->id]))->with('success','Matriz editada com sucesso!');
+        $dados = dadosMatriz::where([
+            'matrizs_id' => $matriz->id
+        ])->get();
+        $dadosMatriz = $dados[0]->dados;
+        $dadosJson = json_decode($dadosMatriz);
+        //calcula a $oposta para deixar ela disponivel na pagina
+        $oposta = array();
+        foreach ($dadosJson as $key => $dados){
+            $oposta[$key] = ($dados * (-1));
+        }
+
+        return view('Matriz.Ver',['id' => $matriz->id], compact('dados','oposta','matriz',   'dadosJson'  ))->with('success','Matriz editada com sucesso!');
     }
     //calcula o traço de uma matriz quadrada
     public function traco($id,$colunaValor){
