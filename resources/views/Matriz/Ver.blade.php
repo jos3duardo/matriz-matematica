@@ -1,7 +1,8 @@
 @extends('Layout.principal')
 @section('content')
     <br>
-        <a href="{{route('index')}}" class="btn btn-sm btn-dark"> <i class="fas fa-chevron-left"></i> Voltar</a>
+    <div class="col-md-12 col-sm-auto  col-lg-12">
+        <a href="{{route('index')}}" class="btn btn-sm btn-dark "> <i class="fas fa-chevron-left"></i> Voltar</a>
         <a href="#" class=" btn btn-sm btn-dark" data-toggle="modal" data-target="#dadosMatrizModal" title="Mostar dados da Matriz">
             <i class="fas fa-info-circle"></i> Dados da Matriz
         </a>
@@ -11,6 +12,7 @@
         <a href="#" onclick="mostrarDiv('editBtn')" id="btnAddMatriz" class="btn btn-sm btn-dark" title="Editar os numeros da Matriz">
             <i class="fas fa-edit"></i> Editar
         </a>
+    </div>
     <hr>
     @if (isset($traco))
         <div class="alert alert-dark alert-dismissible fade show" role="alert">
@@ -30,7 +32,7 @@
                 $ordem2 = 0;
                 $ordem2 = ($dadosJson[0]*$dadosJson[3])-($dadosJson[1]*$dadosJson[2]);
             @endphp
-            <a>Determinante de uma Matriz de ordem 2 é: {{$ordem2}}</a>
+            <a>Determinante a Matriz de ordem 2 é <b>{{$ordem2}}</b></a>
         @endif
     </div>
     {{-- fim determinante de ordem 2--}}
@@ -48,7 +50,7 @@
                 $linha2 = ($dadosJson[1]*$dadosJson[3]*$dadosJson[8])+($dadosJson[0]*$dadosJson[5]*$dadosJson[7])+($dadosJson[2]*$dadosJson[4]*$dadosJson[6]);
                 $ordem3 = $linha1-$linha2;
             @endphp
-            <a>Determinante de uma Matriz de ordem 3 é: {{$ordem3}}</a>
+            <a>Determinante da Matriz de ordem 3 é <b> {{$ordem3}}</b></a>
         @endif
     </div>
     {{--fim determinante de ordem 3--}}
@@ -147,18 +149,18 @@
                         </div>
                     </div>
                     {{-- fim matriz 2--}}
-                    {{--inicio matriz inversa--}}
-                    <div class="col-md-auto" id="inversa" style="display: none">
+                    {{--inicio matriz oposta--}}
+                    <div class="col-md-auto" id="oposta" style="display: none">
                         <div class="card"  style="text-align: center">
                             <div class="card-header">
-                                <h4 class="card-title">Inversa</h4>
+                                <h4 class="card-title">Oposta</h4>
                             </div>
                             <div class="card-body">
                                 @php
                                     $auxiliar=1;
                                     $colunas = $matriz->colunas;
                                 @endphp
-                                @foreach($inversa as $key => $dado)
+                                @foreach($oposta as $key => $dado)
                                     <input type="text" class="inputMatriz" value="{{$dado}}">
                                     @if($colunas == $auxiliar )
                                         <br/>
@@ -173,7 +175,7 @@
                             </div>
                         </div>
                     </div>
-                    {{--fim matriz inversa--}}
+                    {{--fim matriz oposta--}}
                     {{--inicio matriz transposta--}}
                     <div class="card" id="transposta" style="display: none">
                         <div class="card-header">
@@ -228,20 +230,30 @@
                     @endif
                 </div>
             </div>
+            {{--  inicio opcoes para as matrizes          --}}
             <div class="card-footer">
                 <a href="#" onclick="mostrarDiv('transposta')" class="btn btn-sm btn-dark"><i class="fas fa-retweet"></i> Transposta</a>
-                @if($matriz->tipo == 'Quadrada Nula' || $matriz->tipo == 'Quadrada')
-                    <a href="#" onclick="mostrarDiv('inversa')" class="btn btn-sm btn-dark"><i class="fas fa-exchange-alt"></i> Inversa</a>
+                <a href="#" onclick="mostrarDiv('oposta')" class="btn btn-sm btn-dark"><i class="fas fa-yin-yang"></i> Oposta</a>
+            @if($matriz->tipo == 'Quadrada Nula' || $matriz->tipo == 'Quadrada')
+                    {{-- validacao para a varialvel ordem2 --}}
+                    @if(isset($ordem2))
+                        {{-- validação para somente mostrar o botão de calcular a inversa de uma matriz de   --}}
+                        {{-- de ordem 2 caso seu determinante seja maior que 0. Somente se o determinante for maior que 0 que o btn é mostrado  --}}
+                        @if($ordem2 > 0)
+                            <a href="#" onclick="mostrarDiv('inversa')" class="btn btn-sm btn-dark"><i class="fas fa-exchange-alt"></i> Inversa</a>
+                        @endif
+                    @endif
                     <a href="{{route('traco',['id' => $matriz->id, 'colunas' => $matriz->colunas])}}" class="btn btn-sm btn-dark"><i class="fas fa-wave-square"></i> Traço</a>
                 @endif
                 @if($matriz->linhas == 2 && $matriz->colunas == 2)
-                    <a href="#" onclick="mostrarDiv('ordem2')" class="btn btn-sm btn-dark" title="Mostar determinante da Matriz"><i class="far fa-hourglass"></i> Determinante</a>
+                    <a href="#" onclick="mostrarDiv('ordem2')" class="btn btn-sm btn-dark" title="Mostar o determinante de uma Matriz de ordem 2"><i class="far fa-hourglass"></i> Determinante</a>
                 @endif
                 @if($matriz->linhas == 3 && $matriz->colunas == 3)
-                    <a href="#" onclick="mostrarDiv('ordem3')" class="btn btn-sm btn-dark" title="Mostar determinante da Matriz"><i class="far fa-hourglass"></i> Determinante</a>
+                    <a href="#" onclick="mostrarDiv('ordem3')" class="btn btn-sm btn-dark" title="Mostar o determinante da uma Matriz de ordem 3"><i class="far fa-hourglass"></i> Determinante</a>
                 @endif
                 <a href="#" data-toggle="modal" data-target="#numeroMatrizModal" class="btn btn-sm btn-dark"><i class="fas fa-times"></i> Multiplicar</a>
             </div>
+            {{--    fim opcoes para as matrizes        --}}
         </div>
     </div>
 
@@ -282,32 +294,5 @@
                 </div>
             </div>
         </div>
-        {{--inicio matriz determinante 2 de uma matriz --}}
-
-        {{--inicio matriz determinante 3 de uma matriz --}}
-        @if($matriz->linhas == 3 && $matriz->colunas == 3 )
-        <div class="modal fade" id="ordem3MatrizModal" tabindex="-1" role="dialog" aria-labelledby="ordem2MatrizModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-lg" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h4>Determinante de uma Matriz de ordem 3</h4>
-                    </div>
-                    <div class="modal-body">
-                        <div class="list-group-vertical-sm">
-                            @php
-                                $ordem3 = 0;
-                                $linha1 = 0;
-                                $linha2 = 0;
-                                $linha1 = ($dadosJson[0]*$dadosJson[4]*$dadosJson[8])+($dadosJson[1]*$dadosJson[5]*$dadosJson[6])+($dadosJson[2]*$dadosJson[3]*$dadosJson[7]);
-                                $linha2 = ($dadosJson[1]*$dadosJson[3]*$dadosJson[8])+($dadosJson[0]*$dadosJson[5]*$dadosJson[7])+($dadosJson[2]*$dadosJson[4]*$dadosJson[6]);
-                                $ordem3 = $linha1-$linha2;
-                            @endphp
-                            <h4>{{$ordem3}}</h4>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        @endif
     </div>
 @endsection

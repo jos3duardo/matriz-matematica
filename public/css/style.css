@@ -4,10 +4,19 @@
 .fundo{
     background: url("../storage/img/navbar.jpg");
 }
-footer a{
-    position: relative;
-    color: #ffffff;
+footer{
+    width: 100%;
+    height: 40px;
+    position: fixed;
+    bottom: 0;
+    left: 0;
 }
 BODY{
+    width: auto;
     font-family: Roboto;
+}
+.color-darck tr td {
+    color: #343a40;
+    background-color: #343a40;
+
 }

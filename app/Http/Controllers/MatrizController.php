@@ -65,11 +65,11 @@ class MatrizController extends Controller
         ])->get();
         $dadosMatriz = $dados[0]->dados;
         $dadosJson = json_decode($dadosMatriz);
-        $inversa = array();
+        $oposta = array();
         foreach ($dadosJson as $key => $dados){
-            $inversa[$key] = ($dados * (-1));
+            $oposta[$key] = ($dados * (-1));
         }
-        return view('Matriz.Ver',compact('dadosJson','dados','matriz','inversa'));
+        return view('Matriz.Ver',compact('dadosJson','dados','matriz','oposta'));
     }
     //função que realiza a multiplicação de uma matriz
     public function multiplicar(Request $request, $id){
@@ -84,15 +84,15 @@ class MatrizController extends Controller
         //pega somente os valores
         $dadosMatriz = $dados[0]->dados;
         $dadosJson = json_decode($dadosMatriz);
-        $inversa = array();
+        $oposta = array();
         foreach ($dadosJson as $key => $dados){
-            $inversa[$key] = ($dados * (-1));
+            $oposta[$key] = ($dados * (-1));
         }
         $multiplicacao = array();
         foreach ($dadosJson as $key => $dados){
             $multiplicacao[$key] = ($dados * $numero);
         }
-        return view('Matriz.Ver',compact('dadosJson','dados','matriz','inversa','multiplicacao','numero'));
+        return view('Matriz.Ver',compact('dadosJson','dados','matriz','oposta','multiplicacao','numero'));
     }
     //esta função não esta sendo utilizada
     //mas ela pode ser ativada a qualquer momento
@@ -109,10 +109,10 @@ class MatrizController extends Controller
         $dadosMatriz = $dados[0]->dados;
         //transforma em um array
         $dadosJson = json_decode($dadosMatriz);
-        //calcula a inversa para deixar ela disponivel na pagina
-        $inversa = array();
+        //calcula a $oposta para deixar ela disponivel na pagina
+        $oposta = array();
         foreach ($dadosJson as $key => $dados){
-            $inversa[$key] = ($dados * (-1));
+            $oposta[$key] = ($dados * (-1));
         }
         //variavel que ira armazenar o resultado da multiplicação
         $multiplicacao = array();
@@ -120,21 +120,21 @@ class MatrizController extends Controller
         foreach ($dadosJson as $key => $dados){
             $multiplicacao[$key] = ($dados * $numero);
         }
-        return view('Matriz.Ver',compact('dadosJson','dados','matriz','inversa','multiplicacao','numero'));
+        return view('Matriz.Ver',compact('dadosJson','dados','matriz','oposta','multiplicacao','numero'));
     }
     //por enquanto não esta sendo usada esta função os calculos estão sendo feitos direto na pagina
-    public function Inversa($id){
+    public function Oposta($id){
         $matriz = Matriz::find($id);
         $dados = dadosMatriz::where([
             'matrizs_id' => $matriz->id
         ])->get();
         $dadosMatriz = $dados[0]->dados;
         $dadosJson = json_decode($dadosMatriz);
-        $inversa = array();
+        $oposta = array();
         foreach ($dadosJson as $key => $dados){
-            $inversa[$key] = ($dados * (-1));
+            $oposta[$key] = ($dados * (-1));
         }
-        return view('Matriz.ver',compact('dadosJson','dados','matriz','inversa'));
+        return view('Matriz.ver',compact('dadosJson','dados','matriz','oposta'));
     }
     //por enquanto não esta sendo usada esta função os calculos estão sendo feitos direto na pagina
     public function Transposta($id){
@@ -163,10 +163,10 @@ class MatrizController extends Controller
         //converte em um array
         $dadosJson = json_decode($dadosMatriz);
 
-        //calcula a inversa para deixar ela disponivel na pagina
-        $inversa = array();
+        //calcula a $oposta para deixar ela disponivel na pagina
+        $oposta = array();
         foreach ($dadosJson as $key => $dados){
-            $inversa[$key] = ($dados * (-1));
+            $oposta[$key] = ($dados * (-1));
         }
         //variavel que ira guardar o resultado
         $resultado = array();
@@ -182,7 +182,7 @@ class MatrizController extends Controller
                 $resultado[$key] = $dados - $dados2[$key];
             }
         }
-        return view('Matriz.Ver',compact('dadosJson','dados','matriz','inversa','multiplicacao','numero','resultado'));
+        return view('Matriz.Ver',compact('dadosJson','dados','matriz','oposta','multiplicacao','numero','resultado'));
     }
     //apaga uma matriz e todos os dados que existem nela
     public function destroy($id){
@@ -197,6 +197,7 @@ class MatrizController extends Controller
             return redirect(route('index'))->with('error','A matriz não pode ser apagada!');
         }
     }
+    //edita uma matriz na view (Matriz.Ver)
     public function editar(Request $request, $id){
         $dados = json_encode($request->input('numeros'));
         $matriz = Matriz::find($id);
@@ -206,7 +207,7 @@ class MatrizController extends Controller
             $dadosMatriz->dados = $dados;
             $dadosMatriz->save();
         }
-        return redirect(route('index'))->with('success','Matriz editada com sucesso!');
+        return redirect(route('ver',['id' => $matriz->id]))->with('success','Matriz editada com sucesso!');
     }
     //calcula o traço de uma matriz quadrada
     public function traco($id,$colunaValor){
@@ -222,10 +223,10 @@ class MatrizController extends Controller
         $dadosMatriz = $dados[0]->dados;
         //converte em um array
         $dadosJson = json_decode($dadosMatriz);
-        //calcula a inversa para deixar ela disponivel na pagina
-        $inversa = array();
+        //calcula a $oposta para deixar ela disponivel na pagina
+        $oposta = array();
         foreach ($dadosJson as $key => $dados){
-            $inversa[$key] = ($dados * (-1));
+            $oposta[$key] = ($dados * (-1));
         }
         //variavel que ira guardar o resultado
         $traco = 0;
@@ -239,6 +240,6 @@ class MatrizController extends Controller
             }
             $key++;
         }
-        return view('Matriz.Ver',compact('dadosJson','dados','matriz','inversa','traco'));
+        return view('Matriz.Ver',compact('dadosJson','dados','matriz','oposta','traco'));
     }
 }

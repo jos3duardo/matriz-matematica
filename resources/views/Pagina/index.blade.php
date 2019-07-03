@@ -9,8 +9,8 @@
     <div class="align-items-center pt-3 pb-2 mb-3 border-bottom">
             @if(count($matrizes) > 0 )
                 <h4 class="card-title">Matrizes Geradas</h4>
-                <table class="table table-hover table-sm">
-                    <thead class="thead-dark">
+                <table class="table table-hover table-dark table-sm">
+                    <thead class="thead-light">
                     <tr>
                         <td>Id</td>
                         <td>Linha</td>
