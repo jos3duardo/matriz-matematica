@@ -215,4 +215,37 @@ class MatrizController extends Controller
         }
         return redirect(route('index'))->with('success','Matriz editada com sucesso!');
     }
+    //calcula o traço de uma matriz quadrada
+    public function traco($id,$colunaValor){
+        //recebe o valor da coluna
+        $coluna = $colunaValor;
+        //procura a matriz com o id que é enviado
+        $matriz = Matriz::find($id);
+        //procura os dados da matriz
+        $dados = dadosMatriz::where([
+            'matrizs_id' => $matriz->id
+        ])->get();
+        //pega somente os numeros
+        $dadosMatriz = $dados[0]->dados;
+        //converte em um array
+        $dadosJson = json_decode($dadosMatriz);
+        //calcula a inversa para deixar ela disponivel na pagina
+        $inversa = array();
+        foreach ($dadosJson as $key => $dados){
+            $inversa[$key] = ($dados * (-1));
+        }
+        //variavel que ira guardar o resultado
+        $traco = 0;
+        $key = 0;
+        $traco += (int)$dadosJson[0];
+        $tracoCalculo = (int)$coluna;
+        foreach ($dadosJson as $dados) {
+            if ($key == $tracoCalculo+1 ){
+                $traco += (int)$dados;
+                $key=0;
+            }
+            $key++;
+        }
+        return view('Matriz.Ver',compact('dadosJson','dados','matriz','inversa','traco'));
+    }
 }
