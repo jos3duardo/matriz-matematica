@@ -204,7 +204,7 @@ class MatrizController extends Controller
         if ($matriz->save()){
             $dadosMatriz = dadosMatriz::find($matriz->id);
             $dadosMatriz->matrizs_id = $matriz->id;
-            $dadosMatriz->dados = $ numeros;
+            $dadosMatriz->dados = $numeros;
             $dadosMatriz->save();
         }
         $dados = dadosMatriz::where([
