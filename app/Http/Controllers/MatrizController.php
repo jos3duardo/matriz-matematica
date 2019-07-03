@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\dadosMatriz;
 use App\Matriz;
 use Illuminate\Http\Request;
-
 class MatrizController extends Controller
 {
     public function index()
@@ -13,7 +12,6 @@ class MatrizController extends Controller
         $matrizes = Matriz::all();
         return view('Pagina.index', compact('matrizes'));
     }
-
     /** como o proprio nome sugere ele gera os campos para o usuario preencher a matriz
      * @param Request $request
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
@@ -51,7 +49,6 @@ class MatrizController extends Controller
         foreach ($dadosJson as $key => $dados){
             $nula += $dados * 1;
         }
-
         //valida os dados da matriz caso os valores sejam 0
         if ($nula == 0){
             $matriz = Matriz::find($matriz->id);
@@ -96,7 +93,6 @@ class MatrizController extends Controller
             $multiplicacao[$key] = ($dados * $numero);
         }
         return view('Matriz.Ver',compact('dadosJson','dados','matriz','inversa','multiplicacao','numero'));
-
     }
     //esta função não esta sendo utilizada
     //mas ela pode ser ativada a qualquer momento
@@ -126,7 +122,6 @@ class MatrizController extends Controller
         }
         return view('Matriz.Ver',compact('dadosJson','dados','matriz','inversa','multiplicacao','numero'));
     }
-
     //por enquanto não esta sendo usada esta função os calculos estão sendo feitos direto na pagina
     public function Inversa($id){
         $matriz = Matriz::find($id);
@@ -153,7 +148,6 @@ class MatrizController extends Controller
     }
     //função que realiza o calculo de uma matriz, usa como opcao enviada via request para retornar o valor apos os calculos
     public function calcularMatriz(Request $request, $id){
-
         //recebe a opcao enviada pelo request
         $opcao = $request->opcao;
         //recebe os dados que seram usados para fazer o calcula da matriz
@@ -189,7 +183,6 @@ class MatrizController extends Controller
             }
         }
         return view('Matriz.Ver',compact('dadosJson','dados','matriz','inversa','multiplicacao','numero','resultado'));
-
     }
     //apaga uma matriz e todos os dados que existem nela
     public function destroy($id){

@@ -4,3 +4,10 @@
 .fundo{
     background: url("../storage/img/navbar.jpg");
 }
+footer a{
+    position: relative;
+    color: #ffffff;
+}
+BODY{
+    font-family: Roboto;
+}
