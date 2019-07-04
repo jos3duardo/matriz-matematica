@@ -30,7 +30,7 @@
                 $ordem2 = 0;
                 $ordem2 = ($dadosJson[0]*$dadosJson[3])-($dadosJson[1]*$dadosJson[2]);
             @endphp
-            <a>Determinante a Matriz de ordem 2 é <b>{{$ordem2}}</b></a>
+            <p>Determinante da Matriz de ordem 2 é <b>{{$ordem2}}</b></p>
         @endif
     </div>
     {{-- fim determinante de ordem 2--}}
@@ -178,37 +178,35 @@
                     {{--fim matriz oposta--}}
                     {{--inicio matriz transposta--}}
                     @if(isset($transposta))
-                        @if(count($transposta) >=    0  )
-                        <div class="card" id="transposta" style="display: block">
-                            <div class="card-header bg-dark">
-                                <h4 class="card-title" style="color: white">Transposta</h4>
+                        @if(count($transposta) >= 0)
+                            <div class="card alert-dark" id="transposta" style="display: block">
+                                <div class="card-header bg-dark">
+                                    <h4 class="card-title" style="color: white">Transposta</h4>
+                                </div>
+                                <div class="card-body">
+                                    @php
+                                        $auxiliar=1;
+                                        $colunas = $matriz->linhas;
+                                    @endphp
+                                    @foreach($dadosJson as $key => $dado)
+                                        <input type="text" class="inputMatriz" value="{{$dado}}">
+                                        @if($colunas == $auxiliar )
+                                            <br/>
+                                            <?php $colunas+=$matriz->linhas;?>
+                                        @endif
+                                        <?php $auxiliar++?>
+                                    @endforeach
+                                </div>
                             </div>
-                            <div class="card-body alert-dark">
-                                @php
-                                    $auxiliar=1;
-                                    $colunas = $matriz->linhas;
-                                @endphp
-                                @foreach($dadosJson as $key => $dado)
-                                    <input type="text" class="inputMatriz" value="{{$dado}}">
-                                    @if($colunas == $auxiliar )
-                                        <br/>
-                                        <?php
-                                        $colunas+=$matriz->linhas;
-                                        ?>
-                                    @endif
-                                    <?php $auxiliar++?>
-                                @endforeach
-                            </div>
-                        </div>
                         @endif
                     @endif
                     {{--fim matriz transposta--}}
                     {{-- inicio do resultado--}}
                     @if(isset($resultado))
                     <div class="col-md-auto" id="resultadoSoma" style="display: block">
-                        <div class="card">
-                            <div class="card-header alert-dark">
-                                <h4>Resultado Soma</h4>
+                        <div class="card alert-dark">
+                            <div class="card-header bg-dark">
+                                <h4 style="color: white">Resultado Soma</h4>
                             </div>
                             <div class="card-body">
                                 <form action="{{route('calcularMatriz',['id' => $matriz->id])}}" id="formCalculaMatriz" method="post">
@@ -246,10 +244,12 @@
             @if($matriz->tipo == 'Quadrada Nula' || $matriz->tipo == 'Quadrada')
                     {{-- validacao para a varialvel ordem2 --}}
                     @if(isset($ordem2))
-                        {{-- validação para somente mostrar o botão de calcular a inversa de uma matriz de   --}}
-                        {{-- de ordem 2 caso seu determinante seja maior que 0. Somente se o determinante for maior que 0 que o btn é mostrado  --}}
-                        @if($ordem2 > 0)
-                            <a href="#" onclick="mostrarDiv('inversa')" class="btn btn-sm btn-dark"><i class="fas fa-exchange-alt"></i> Inversa</a>
+                        {{-- validação para somente mostrar o botão de calcular a inversa de uma matriz de
+                        {{-- de ordem 2 caso seu determinante seja diferente de 0--}}
+                        @if($ordem2 != 0)
+                            <a href="{{route('inversa', ['id' => $matriz->id])}}" class="btn btn-sm btn-dark"><i class="fas fa-exchange-alt"></i> Inversa</a>
+                        @else
+                            <a href="#" class="btn btn-sm btn-dark disabled"><i class="fas fa-exchange-alt"></i> Inversa</a>
                         @endif
                     @endif
                     <a href="{{route('traco',['id' => $matriz->id, 'colunas' => $matriz->colunas])}}" class="btn btn-sm btn-dark"><i class="fas fa-wave-square"></i> Traço</a>
@@ -298,6 +298,9 @@
                             <h5>Número de Colunas - {{$matriz->colunas}}</h5>
                             <h5>Tipo - {{($matriz->tipo ? $matriz->tipo : "Sem tipo definido") }}</h5>
                             <h5>Criada em - {{$matriz->created_at->format('d/m/Y H:i:s')}}</h5>
+                            @if(isset($ordem2) && $ordem2 == 0)
+                                <h5 class="alert-dark">Determinante da matriz é 0! A matriz não possui inversa</h5>
+                            @endif
                         </div>
                     </div>
                 </div>

@@ -80,15 +80,12 @@ class MatrizController extends Controller
         //pega somente os valores
         $dadosMatriz = $dados[0]->dados;
         $dadosJson = json_decode($dadosMatriz);
-        $oposta = array();
-        foreach ($dadosJson as $key => $dados){
-            $oposta[$key] = ($dados * (-1));
-        }
+
         $multiplicacao = array();
         foreach ($dadosJson as $key => $dados){
             $multiplicacao[$key] = ($dados * $numero);
         }
-        return view('Matriz.Ver',compact('dadosJson','dados','matriz','oposta','multiplicacao','numero'));
+        return view('Matriz.Ver',compact('dadosJson','dados','matriz','multiplicacao','numero'));
     }
     //esta função não esta sendo utilizada
     //mas ela pode ser ativada a qualquer momento
@@ -161,26 +158,21 @@ class MatrizController extends Controller
         //converte em um array
         $dadosJson = json_decode($dadosMatriz);
 
-        //calcula a $oposta para deixar ela disponivel na pagina
-        $oposta = array();
-        foreach ($dadosJson as $key => $dados){
-            $oposta[$key] = ($dados * (-1));
-        }
         //variavel que ira guardar o resultado
         $resultado = array();
         //caso a opcao seja somar
         if ($opcao == 'somar'){
             foreach ($dadosJson as $key => $dados){
-                $resultado[$key] = $dados + $dados2[$key];
+                $resultado[$key] = ($dados) + ($dados2[$key]);
             }
         }
         //caso a opcao sena subtrair
         if ($opcao == 'subtrair'){
             foreach ($dadosJson as $key => $dados){
-                $resultado[$key] = $dados - $dados2[$key];
+                $resultado[$key] = ($dados) - ($dados2[$key]);
             }
         }
-        return view('Matriz.Ver',compact('dadosJson','dados','matriz','oposta','multiplicacao','numero','resultado'));
+        return view('Matriz.Ver',compact('dadosJson','dados','matriz','multiplicacao','numero','resultado'));
     }
     //apaga uma matriz e todos os dados que existem nela
     public function destroy($id){
@@ -232,11 +224,6 @@ class MatrizController extends Controller
         $dadosMatriz = $dados[0]->dados;
         //converte em um array
         $dadosJson = json_decode($dadosMatriz);
-        //calcula a $oposta para deixar ela disponivel na pagina
-//        $oposta = array();
-//        foreach ($dadosJson as $key => $dados){
-//            $oposta[$key] = ($dados * (-1));
-//        }
         //variavel que ira guardar o resultado
         $traco = 0;
         $key = 0;
@@ -250,5 +237,32 @@ class MatrizController extends Controller
             $key++;
         }
         return view('Matriz.Ver',compact('dadosJson','dados','matriz','traco'));
+    }
+
+    public function inversaOrdem2(Request $request, $id){
+        $dadosJson2 = $request->
+        //procura a matriz com o id que é enviado
+        $matriz = Matriz::find($id);
+        //procura os dados da matriz
+        $dados = dadosMatriz::where([
+            'matrizs_id' => $matriz->id
+        ])->get();
+        //pega somente os numeros
+        $dadosMatriz = $dados[0]->dados;
+
+        //converte em um array
+        $dadosJson = json_decode($dadosMatriz);
+        $identidade = ['1','0','0','1'];
+        //[0][1]  [x][y] = [(0*x) + (1*z)] [(0*y)+(1*z)]
+        //[2][3]  [z][w] = [(2*x) + (3*z)] [(2*y)+(3*z)]
+        //itulizando o escalonamento
+
+        $elemento1 = $dadosJson[0] * $dadosJson2[0];
+        $elemento2 = $dadosJson[1] * $dadosJson2[1];
+        $elemento3 = $dadosJson[2] * $dadosJson2[2];
+        $elemento4 = $dadosJson[2] * $dadosJson2[2];
+
+        dd($elemento1,$elemento2,$elemento3,$elemento4);
+
     }
 }
