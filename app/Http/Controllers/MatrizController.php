@@ -189,20 +189,17 @@ class MatrizController extends Controller
     }
     //edita uma matriz na view (Matriz.Ver)
     public function editar(Request $request, $id){
-        $numeros = json_encode($request->input('numeros'));
+        $valores = json_encode($request->input('valores'));
         $matriz = Matriz::find($id);
-
         $dadosMatriz = dadosMatriz::find($id);
-        $dadosMatriz->dados = $numeros;
+        $dadosMatriz->dados = $valores;
         $dadosMatriz->save();
-
         $dados = dadosMatriz::where([
             'matrizs_id' => $matriz->id
         ])->get();
         $dadosMatriz = $dados[0]->dados;
         $dadosJson = json_decode($dadosMatriz);
-
-        return view('Matriz.Ver',['id' => $matriz->id], compact('dados','matriz',   'dadosJson'  ))->with('success','Matriz editada com sucesso!');
+        return view('Matriz.Ver',['id' => $matriz->id], compact('dados','matriz', 'dadosJson'))->with('success','Matriz editada com sucesso!');
     }
     //calcula o traço de uma matriz quadrada
     public function traco($id,$colunaValor){

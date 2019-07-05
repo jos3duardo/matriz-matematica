@@ -72,7 +72,7 @@
                                 <form action="{{route('editar',['id' => $matriz->id])}}" method="post">
                                     @csrf
                                     @foreach($dadosJson as $key => $dado)
-                                        <input  type="text" class="inputMatriz" id="dado" name="numeros[]" value="{{$dado}}">
+                                        <input  type="text" class="inputMatriz" id="dado" name="valores[]" value="{{$dado}}">
                                         @if($colunas == $auxiliar )
                                             <br/>
                                             <?php   $colunas+=$matriz->colunas;?>
