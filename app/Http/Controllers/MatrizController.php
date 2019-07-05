@@ -192,7 +192,7 @@ class MatrizController extends Controller
         $numeros = json_encode($request->input('numeros'));
         $matriz = Matriz::find($id);
 
-        $dadosMatriz = dadosMatriz::find($matriz->id);
+        $dadosMatriz = dadosMatriz::find($id);
         $dadosMatriz->dados = $numeros;
         $dadosMatriz->save();
 
