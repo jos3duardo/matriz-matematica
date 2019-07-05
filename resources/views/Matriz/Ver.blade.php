@@ -237,7 +237,7 @@
                 <a href="#" onclick="mostrarDiv('matriz2')" id="btnAddMatriz" class="btn btn-sm btn-dark" title="Somar, Subtrair ou Multiplicar uma Matriz">
                     + Soma - Sub x Mult
                 </a>
-                <a href="{{route('transposta',['id' => $matriz->id])}}" class="btn btn-sm btn-dark"><i class="fas fa-retweet"></i> Transposta</a>
+{{--                <a href="{{route('transposta',['id' => $matriz->id])}}" class="btn btn-sm btn-dark disabled"><i class="fas fa-retweet"></i> Transposta</a>--}}
                 <a href="{{route('oposta',['id' => $matriz->id])}}" class="btn btn-sm btn-dark"><i class="fas fa-yin-yang"></i> Oposta</a>
 {{--                <a href="#" onclick="mostrarDiv('transposta')" class="btn btn-sm btn-dark"><i class="fas fa-retweet"></i> Transposta</a>--}}
 {{--                <a href="#" onclick="mostrarDiv('oposta')" class="btn btn-sm btn-dark"><i class="fas fa-yin-yang"></i> Oposta</a>--}}
