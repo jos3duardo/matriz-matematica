@@ -7,9 +7,9 @@
             <i class="fas fa-info-circle"></i> Dados da Matriz
         </a>
 
-        <a href="#" onclick="mostrarDiv('editBtn')" id="btnAddMatriz" class="btn btn-sm btn-dark" title="Editar os numeros da Matriz">
-            <i class="fas fa-edit"></i> Editar
-        </a>
+    {{--        <a href="#" onclick="mostrarDiv('editBtn')" id="btnAddMatriz" class="btn btn-sm btn-dark" title="Editar os numeros da Matriz">--}}
+    {{--            <i class="fas fa-edit"></i> Editar--}}
+    {{--        </a>--}}
     </div>
     <hr>
     @if (isset($traco))
@@ -69,8 +69,8 @@
                                 <h4 style="color: white">Original</h4>
                             </div>
                             <div class="card-body alert-dark">
-                                <form action="{{route('editar',['id' => $matriz->id])}}" method="post">
-                                    @csrf
+{{--                                <form action="{{route('editar',['id' => $matriz->id])}}" method="post">--}}
+{{--                                    @csrf--}}
                                     @foreach($dadosJson as $key => $dado)
                                         <input  type="text" class="inputMatriz" id="dado" name="valores[]" value="{{$dado}}">
                                         @if($colunas == $auxiliar )
@@ -82,8 +82,8 @@
                                         ?>
                                     @endforeach
                                     <br>
-                                <button type="submit" onclick="return confirm('Os dados da Matriz seram alterados! Deseja continuar?')" class="btn btn-sm btn-dark" id="editBtn" style="display: none"><i class="fas fa-save"></i> Salvar</button>
-                                </form>
+{{--                                <button type="submit" onclick="return confirm('Os dados da Matriz seram alterados! Deseja continuar?')" class="btn btn-sm btn-dark" id="editBtn" style="display: none"><i class="fas fa-save"></i> Salvar</button>--}}
+{{--                                </form>--}}
                             </div>
                         </div>
                     </div>
