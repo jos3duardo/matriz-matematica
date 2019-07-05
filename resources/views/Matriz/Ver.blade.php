@@ -247,7 +247,7 @@
                         {{-- validação para somente mostrar o botão de calcular a inversa de uma matriz de
                         {{-- de ordem 2 caso seu determinante seja diferente de 0--}}
                         @if($ordem2 != 0)
-                            <a href="{{route('inversa', ['id' => $matriz->id])}}" class="btn btn-sm btn-dark"><i class="fas fa-exchange-alt"></i> Inversa</a>
+                            <a href="{{route('inversa', ['id' => $matriz->id])}}" class="btn btn-sm btn-dark disabled"><i class="fas fa-exchange-alt"></i> Inversa</a>
                         @else
                             <a href="#" class="btn btn-sm btn-dark disabled"><i class="fas fa-exchange-alt"></i> Inversa</a>
                         @endif

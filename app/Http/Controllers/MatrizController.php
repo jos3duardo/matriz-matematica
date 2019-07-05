@@ -193,7 +193,6 @@ class MatrizController extends Controller
         $matriz = Matriz::find($id);
 
         $dadosMatriz = dadosMatriz::find($matriz->id);
-        $dadosMatriz->matrizs_id = $matriz->id;
         $dadosMatriz->dados = $numeros;
         $dadosMatriz->save();
 
