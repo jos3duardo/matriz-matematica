@@ -1,4 +1,7 @@
 <?php
+
+Auth::routes();
+
 Route::get('/', 'MatrizController@index')->name('index');
 Route::get('/apaga/{id}', 'MatrizController@destroy')->name('destroy');
 Route::post('/gerar/matriz','MatrizController@gerarMatriz')->name('gerarMatriz');
@@ -14,3 +17,5 @@ Route::post('/calcular/{id}', 'MatrizController@calcularMatriz')->name('calcular
 Route::post('/edit/{id}','MatrizController@editar')->name('editar');
 Route::get('/inversa/{id}','MatrizController@inversaOrdem2')->name('inversa');
 Route::get('/traco/{id}/{coluna}','MatrizController@traco')->name('traco');
+
+Route::get('/home', 'HomeController@index')->name('home');
